@@ -13,6 +13,7 @@ A documentation site for Shadow Army (`sa`), laid out the way the Claude Code do
 - **Tabs approved** (2026-10-23): the seven tabs in `nav.ts` stay.
 - **Linked from the portfolio header** (2026-10-23).
 - **Quickstart written now** (2026-10-23): from the spec, marked as planned, until v2 has an install command.
+- **"Use Shadow Army" renamed for v2** (2026-10-23): `sa summon`, `sa run` and the live dashboard are v1 features that v2 removes. The group now covers `/army`, `/send`, the pane and the strip, stopping and the queue, sessions, and `/diff` and `/apply`.
 
 ## What was measured on the reference page (2026-10-23)
 
