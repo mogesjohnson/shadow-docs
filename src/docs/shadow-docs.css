@@ -1263,3 +1263,14 @@
   background: none;
   font-size: inherit;
 }
+.sd-prose .sd-pre-inline {
+  margin: 0 0 14px;
+  padding: 12px 14px;
+  overflow-x: auto;
+  border: 1px solid var(--sd-edge);
+  border-radius: 12px;
+  background: var(--sd-surface);
+  font-family: var(--sd-mono);
+  font-size: 13.5px;
+  line-height: 1.6;
+}

@@ -1,17 +1,21 @@
 import type { ComponentType } from "react";
 import type { PageEntry } from "./nav";
+import { AdapterProtocol } from "./pages/AdapterProtocol";
 import { ApplyChanges } from "./pages/ApplyChanges";
 import { Army } from "./pages/Army";
 import { Autonomy } from "./pages/Autonomy";
 import { BestPractices } from "./pages/BestPractices";
 import { BriefsAndReports } from "./pages/BriefsAndReports";
+import { Capabilities } from "./pages/Capabilities";
 import { Changelog } from "./pages/Changelog";
 import { CheckoutGuard } from "./pages/CheckoutGuard";
+import { AgyCli, ClaudeCli, CodexCli, GrokCli } from "./pages/Clis";
 import { FileClaims } from "./pages/FileClaims";
 import { FirstArmy } from "./pages/FirstArmy";
 import { HardRules } from "./pages/HardRules";
 import { HowItWorks } from "./pages/HowItWorks";
 import { ManageSessions } from "./pages/ManageSessions";
+import { NewAdapter } from "./pages/NewAdapter";
 import { Pane } from "./pages/Pane";
 import { Quickstart } from "./pages/Quickstart";
 import { Roles } from "./pages/Roles";
@@ -20,6 +24,7 @@ import { Send } from "./pages/Send";
 import { ShadowVault } from "./pages/ShadowVault";
 import { Snapshots } from "./pages/Snapshots";
 import { Soldiers } from "./pages/Soldiers";
+import { SoldiersOverview } from "./pages/SoldiersOverview";
 import { Steer } from "./pages/Steer";
 import { TheMonarch } from "./pages/TheMonarch";
 import { Troubleshooting } from "./pages/Troubleshooting";
@@ -51,4 +56,12 @@ export const written: Record<string, ComponentType<{ page: PageEntry }>> = {
   "first-army": FirstArmy,
   "second-reviewer": SecondReviewer,
   troubleshooting: Troubleshooting,
+  "soldiers-overview": SoldiersOverview,
+  claude: ClaudeCli,
+  codex: CodexCli,
+  grok: GrokCli,
+  agy: AgyCli,
+  "adapter-protocol": AdapterProtocol,
+  capabilities: Capabilities,
+  "new-adapter": NewAdapter,
 };
