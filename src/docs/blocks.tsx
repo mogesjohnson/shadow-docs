@@ -275,7 +275,16 @@ export function CodeBlock({
 /* Accordions, cards, tables                                            */
 /* ------------------------------------------------------------------ */
 
-export function Accordion({ title, icon: Icon }: { title: string; icon?: LucideIcon }) {
+/** Pass children for real copy; without them the body is a placeholder. */
+export function Accordion({
+  title,
+  icon: Icon,
+  children,
+}: {
+  title: string;
+  icon?: LucideIcon;
+  children?: ReactNode;
+}) {
   return (
     <details className="sd-accordion">
       <summary className="sd-accordion-summary">
@@ -284,21 +293,32 @@ export function Accordion({ title, icon: Icon }: { title: string; icon?: LucideI
         <span>{title}</span>
       </summary>
       <div className="sd-accordion-body">
-        <Ph label={`${title}: what it does and an example prompt`} lines={3} />
+        {children ?? <Ph label={`${title}: what it does and an example prompt`} lines={3} />}
       </div>
     </details>
   );
 }
 
-export function CardGrid({ cards }: { cards: { title: string; slug: string; icon: LucideIcon }[] }) {
+/** A card with `text` shows it; one without shows placeholder lines. */
+export function CardGrid({
+  cards,
+}: {
+  cards: { title: string; slug: string; icon: LucideIcon; text?: string }[];
+}) {
   return (
     <div className="sd-cards">
-      {cards.map(({ title, slug, icon: Icon }) => (
+      {cards.map(({ title, slug, icon: Icon, text }) => (
         <Link key={slug} href={hrefOf(slug)} className="sd-card">
           <Icon size={20} className="sd-card-icon" aria-hidden="true" />
           <span className="sd-card-title">{title}</span>
-          <span className="sd-ph-line sd-card-line" />
-          <span className="sd-ph-line sd-card-line sd-card-line-short" />
+          {text ? (
+            <span className="sd-card-text">{text}</span>
+          ) : (
+            <>
+              <span className="sd-ph-line sd-card-line" />
+              <span className="sd-ph-line sd-card-line sd-card-line-short" />
+            </>
+          )}
         </Link>
       ))}
     </div>
