@@ -1,0 +1,27 @@
+{
+  "name": "shadow-docs",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Shadow Docs: documentation for Shadow Army, shown standalone and at /shadow-docs on the portfolio.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "prepare": "node scripts/setup-hooks.mjs"
+  },
+  "dependencies": {
+    "lucide-react": "^1.48.0",
+    "next": "16.3.7",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.7",
+    "typescript": "^5"
+  }
+}

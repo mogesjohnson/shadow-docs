@@ -1,0 +1,37 @@
+#!/bin/sh
+# Checks every commit message before the commit is made:
+#   - the subject is "#<issue> <Action>" or "[F<n>] <Action>", at most 72 characters;
+#   - no closing keyword ("fixes #12") anywhere: GitHub would close the issue when the commit reaches main.
+# Same rules as scripts/pr-format.mjs, which the "PR format" workflow runs on every PR.
+# Turned on by scripts/setup-hooks.mjs (or: git config core.hooksPath .githooks).
+# Details: docs/version-control/03-commits.md.
+
+subject=$(head -n 1 "$1" | tr -d '\r')
+
+case "$subject" in
+  "Merge "*|"fixup! "*|"squash! "*|"Revert "*) exit 0 ;;
+esac
+
+reject() {
+  echo "commit rejected: $1" >&2
+  echo "  subject: $subject" >&2
+  echo "  see docs/version-control/03-commits.md. Fix the message; do not bypass with --no-verify." >&2
+  exit 1
+}
+
+if ! printf '%s\n' "$subject" | grep -Eq '^(#[0-9]+|\[F[0-9]+\]) [^ ]'; then
+  reject "the subject must look like '#<issue> <Action>' or '[F<n>] <Action>'."
+fi
+
+if [ "${#subject}" -gt 72 ]; then
+  reject "the subject is ${#subject} characters; the limit is 72."
+fi
+
+# The rest of the message, without git's comment lines and the diff below the scissors line (commit -v).
+body=$(sed -e '1d' -e '/^[#;] -* >8 -*$/,$d' -e '/^[#;]/d' "$1")
+if printf '%s\n%s\n' "$subject" "$body" |
+  grep -Eiq '(^|[^[:alnum:]_])(close[sd]?|fix(e[sd])?|resolve[sd]?):?[[:space:]]+([[:alnum:]_.-]+/[[:alnum:]_.-]+)?#[0-9]+'; then
+  reject "the message has a closing keyword such as 'fixes #12', which closes the issue when the commit reaches main. Refer to the issue without it."
+fi
+
+exit 0
