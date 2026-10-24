@@ -65,8 +65,8 @@ export function ApplyChanges({ page }: { page: PageEntry }) {
         </ul>
         <Callout kind="warning">
           <p>
-            Shadow Army does not assume <code>git apply</code> is atomic. It checks and restores the files itself, so
-            a failed apply never leaves the folder partly changed.
+            Shadow Army does not assume <code>git apply</code> is atomic. A write can fail after the check has passed,
+            and the copy taken before writing is what puts the folder back.
           </p>
         </Callout>
 

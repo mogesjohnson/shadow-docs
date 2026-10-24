@@ -95,7 +95,8 @@ export function Soldiers({ page }: { page: PageEntry }) {
         />
         <p>
           The design names three more default shadow names for soldiers you add: Kaisel (claude-opus), Bellion
-          (codex-astra) and Tank (claude-opus-build). Kaisel and Bellion take reviews and hard builds.
+          (codex-astra) and Tank (claude-opus-build). Kaisel and Bellion take reviews and hard builds. Tank is named
+          but not yet defined: no shipped file lists it.
         </p>
         <p>
           Roles, cost and the limits live in <code>orchestratorDelegate.md</code>. The CLI, model and autonomy live
