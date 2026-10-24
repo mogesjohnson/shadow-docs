@@ -22,6 +22,7 @@ import { NewAdapter } from "./pages/NewAdapter";
 import { OrchestratorDelegate } from "./pages/OrchestratorDelegate";
 import { Pane } from "./pages/Pane";
 import { Quickstart } from "./pages/Quickstart";
+import { Roadmap } from "./pages/Roadmap";
 import { Roles } from "./pages/Roles";
 import { RoutingPolicy } from "./pages/RoutingPolicy";
 import { RulesMd } from "./pages/RulesMd";
@@ -35,6 +36,7 @@ import { SoldiersOverview } from "./pages/SoldiersOverview";
 import { Steer } from "./pages/Steer";
 import { TheMonarch } from "./pages/TheMonarch";
 import { Troubleshooting } from "./pages/Troubleshooting";
+import { WhatsNew } from "./pages/WhatsNew";
 import { Worktrees } from "./pages/Worktrees";
 
 /** Pages with written copy, by slug. Every other page shows the placeholder. */
@@ -78,4 +80,6 @@ export const written: Record<string, ComponentType<{ page: PageEntry }>> = {
   "agent-md": AgentMd,
   models: Models,
   cost: Cost,
+  "whats-new": WhatsNew,
+  roadmap: Roadmap,
 };
