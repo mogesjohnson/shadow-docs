@@ -1,5 +1,5 @@
 import { DocsShell, type TocItem } from "../DocsShell";
-import { Callout, Feedback, H2, Pagination, PageHeader, Table } from "../blocks";
+import { Callout, Feedback, FromV1, H2, Pagination, PageHeader, Table } from "../blocks";
 import { neighbours, type PageEntry } from "../nav";
 
 /*
@@ -18,7 +18,7 @@ const TOC: TocItem[] = [
 export function ShadowVault({ page }: { page: PageEntry }) {
   const { prev, next } = neighbours(page.slug);
   return (
-    <DocsShell current={page} toc={TOC}>
+    <DocsShell current={page} toc={TOC} fromV1>
       <PageHeader
         page={page}
         description="The .shadow/ folder in your repository holds the army's working files: worktrees, reports and logs. It is never committed."
@@ -37,7 +37,7 @@ export function ShadowVault({ page }: { page: PageEntry }) {
           rows={[
             [
               <code key="p">.shadow/worktrees/</code>,
-              "One worktree per soldier per Claude session, as in v1. Soldiers write here, never in your checkout.",
+              "One worktree per soldier per Claude session. Soldiers write here, never in your checkout.",
             ],
             [<code key="p">.shadow/reports/</code>, "Each soldier's full reply. Only a five-line summary is sent on."],
             [
@@ -79,12 +79,19 @@ export function ShadowVault({ page }: { page: PageEntry }) {
 
         <H2 id="memory">Army memory</H2>
         <p>
-          In v1 the vault also held shared notes curated by the Monarch, plus a private folder for each soldier.
-          Soldiers never saw each other&apos;s transcripts. The vault carries over into v2, but v2&apos;s
-          specification does not yet say how army memory works. This section will be written when it does.
+          The accepted design does not yet say how army memory works. This section will be written when it does.
         </p>
       </div>
-
+      <FromV1>
+        <ul>
+          <li>The Shadow Vault carries over into v2.</li>
+          <li>
+            In v1 the vault also held shared notes curated by the Monarch, plus a private folder for each soldier.
+            Soldiers never saw each other&apos;s transcripts.
+          </li>
+          <li>One worktree per soldier per Claude session is as in v1.</li>
+        </ul>
+      </FromV1>
       <Feedback />
       <Pagination prev={prev} next={next} />
     </DocsShell>

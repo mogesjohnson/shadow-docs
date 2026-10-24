@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { DocsShell, type TocItem } from "../DocsShell";
-import { Callout, CodeBlock, Feedback, H2, H3, Pagination, PageHeader, Table } from "../blocks";
+import { Callout, CodeBlock, Feedback, FromV1, H2, H3, Pagination, PageHeader, Table } from "../blocks";
 import { hrefOf, neighbours, type PageEntry } from "../nav";
 
 /*
@@ -15,13 +15,12 @@ const TOC: TocItem[] = [
   { id: "sending-work", title: "Sending work" },
   { id: "summaries", title: "When summaries come back" },
   { id: "permissions", title: "Permissions" },
-  { id: "from-v1", title: "What changed from v1" },
 ];
 
 export function TheMonarch({ page }: { page: PageEntry }) {
   const { prev, next } = neighbours(page.slug);
   return (
-    <DocsShell current={page} toc={TOC}>
+    <DocsShell current={page} toc={TOC} fromV1>
       <PageHeader
         page={page}
         description="The Monarch is your own Claude Code session. It plans the work, sends briefs to soldiers by name and reads their summaries."
@@ -134,15 +133,19 @@ export function TheMonarch({ page }: { page: PageEntry }) {
             design leaves that to your own Claude Code permissions.
           </p>
         </Callout>
-
-        <H2 id="from-v1">What changed from v1</H2>
+      </div>
+      <FromV1>
         <p>
           v1 ran a separate Monarch CLI. It planned every goal in a fresh session, then made a second call to write
           the report. Measured on 6 October 2026, those two calls cost about 62k tokens for a simple goal, before any
           soldier worked. With Claude as the Monarch, those calls and the repeated reading of the repository go away.
-          v1&apos;s <code>monarch</code> block and <code>orchestrate</code> role mean nothing in v2.
         </p>
-      </div>
+        <ul>
+          <li>
+            v1&apos;s <code>monarch</code> block and <code>orchestrate</code> role mean nothing in v2.
+          </li>
+        </ul>
+      </FromV1>
 
       <Feedback />
       <Pagination prev={prev} next={next} />

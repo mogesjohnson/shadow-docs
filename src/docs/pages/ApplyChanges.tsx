@@ -1,5 +1,5 @@
 import { DocsShell, type TocItem } from "../DocsShell";
-import { Callout, CodeBlock, Feedback, H2, Pagination, PageHeader, Table } from "../blocks";
+import { Callout, CodeBlock, Feedback, FromV1, H2, Pagination, PageHeader, Table } from "../blocks";
 import { neighbours, type PageEntry } from "../nav";
 
 /*
@@ -20,7 +20,7 @@ const TOC: TocItem[] = [
 export function ApplyChanges({ page }: { page: PageEntry }) {
   const { prev, next } = neighbours(page.slug);
   return (
-    <DocsShell current={page} toc={TOC}>
+    <DocsShell current={page} toc={TOC} fromV1>
       <PageHeader
         page={page}
         description="A soldier's work stays on its own branch until you look at it with /diff and copy it into your folder with /apply."
@@ -29,7 +29,7 @@ export function ApplyChanges({ page }: { page: PageEntry }) {
         <Callout kind="note">
           <p>
             Shadow Army 2 is in development. <code>/diff</code> and <code>/apply</code> arrive with its last milestone
-            before release (M6). They carry over v1&apos;s <code>sa apply</code> behaviour.
+            before release (M6).
           </p>
         </Callout>
 
@@ -65,8 +65,8 @@ export function ApplyChanges({ page }: { page: PageEntry }) {
         </ul>
         <Callout kind="warning">
           <p>
-            v1 assumed <code>git apply</code> is atomic, so a failed apply could leave the folder partly changed. v2
-            does not make that assumption.
+            Shadow Army does not assume <code>git apply</code> is atomic. It checks and restores the files itself, so
+            a failed apply never leaves the folder partly changed.
           </p>
         </Callout>
 
@@ -98,7 +98,18 @@ export function ApplyChanges({ page }: { page: PageEntry }) {
           tests passed when none ran still shows &ldquo;not run&rdquo;.
         </p>
       </div>
-
+      <FromV1>
+        <ul>
+          <li>
+            <code>/diff</code> and <code>/apply</code> carry over v1&apos;s <code>sa apply</code>: applying a
+            soldier&apos;s work is still all-or-nothing, and it can still be undone.
+          </li>
+          <li>
+            v1 assumed <code>git apply</code> is atomic, so a failed apply could leave the folder partly changed. v2
+            does not make that assumption.
+          </li>
+        </ul>
+      </FromV1>
       <Feedback />
       <Pagination prev={prev} next={next} />
     </DocsShell>

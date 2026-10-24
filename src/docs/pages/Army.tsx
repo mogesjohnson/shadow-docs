@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { DocsShell, type TocItem } from "../DocsShell";
-import { Callout, CodeBlock, Feedback, H2, Pagination, PageHeader, Table } from "../blocks";
+import { Callout, CodeBlock, Feedback, FromV1, H2, Pagination, PageHeader, Table } from "../blocks";
 import { hrefOf, neighbours, type PageEntry } from "../nav";
 
 /*
@@ -19,7 +19,7 @@ const TOC: TocItem[] = [
 export function Army({ page }: { page: PageEntry }) {
   const { prev, next } = neighbours(page.slug);
   return (
-    <DocsShell current={page} toc={TOC}>
+    <DocsShell current={page} toc={TOC} fromV1>
       <PageHeader
         page={page}
         description="See every soldier in your army, its state and its tag, from the /army command or the strip above the prompt."
@@ -36,7 +36,7 @@ export function Army({ page }: { page: PageEntry }) {
         <CodeBlock placeholder={false} variants={[{ label: "Claude Code", lines: ["/army"] }]} />
         <p>
           <code>/army</code> prints the army in Claude&apos;s transcript: every soldier with its two-letter tag, and
-          the post office&apos;s own log. It takes the place of v1&apos;s <code>sa army</code>.
+          the post office&apos;s own log.
         </p>
         <p>
           A soldier&apos;s name is matched case-insensitively wherever you type it. An unknown name suggests the
@@ -119,11 +119,17 @@ export function Army({ page }: { page: PageEntry }) {
         </ul>
         <p>
           The default shadow names are Iron (claude-sonnet), Igris (codex-sol), Beru (grok), Tusk (agy), Kaisel
-          (claude-opus), Bellion (codex-astra) and Tank (claude-opus-build). See{" "}
+          (claude-opus), Bellion (codex-astra). Tank (claude-opus-build) is named but not yet defined. See{" "}
           <Link href={hrefOf("soldiers")}>Soldiers</Link>.
         </p>
       </div>
-
+      <FromV1>
+        <ul>
+          <li>
+            <code>/army</code> takes the place of v1&apos;s <code>sa army</code>.
+          </li>
+        </ul>
+      </FromV1>
       <Feedback />
       <Pagination prev={prev} next={next} />
     </DocsShell>
