@@ -1,5 +1,5 @@
 import { DocsShell, type TocItem } from "../DocsShell";
-import { Callout, Feedback, H2, Pagination, PageHeader, Table } from "../blocks";
+import { Callout, Feedback, FromV1, H2, Pagination, PageHeader, Table } from "../blocks";
 import { neighbours, type PageEntry } from "../nav";
 
 /*
@@ -19,7 +19,7 @@ const TOC: TocItem[] = [
 export function FileClaims({ page }: { page: PageEntry }) {
   const { prev, next } = neighbours(page.slug);
   return (
-    <DocsShell current={page} toc={TOC}>
+    <DocsShell current={page} toc={TOC} fromV1>
       <PageHeader
         page={page}
         description="A writing soldier claims the paths it may change. Two soldiers never hold overlapping claims, and an audit checks every writing turn against them."
@@ -27,9 +27,8 @@ export function FileClaims({ page }: { page: PageEntry }) {
       <div className="sd-prose">
         <Callout kind="note">
           <p>
-            Shadow Army 2 is in development. Claims, leases and the claim audit carry over from v1 and arrive in
-            v2&apos;s last milestone before release (M6). Details below are v1&apos;s, unless v2&apos;s spec changes
-            them.
+            Shadow Army 2 is in development. Claims, leases and the claim audit arrive in v2&apos;s last milestone before
+            release (M6).
           </p>
         </Callout>
 
@@ -81,7 +80,15 @@ export function FileClaims({ page }: { page: PageEntry }) {
           </p>
         </Callout>
       </div>
-
+      <FromV1>
+        <ul>
+          <li>Claims, leases and the claim audit carry over from v1 (ADR-0013).</li>
+          <li>
+            The claim format, the matching rules and the 90-second lease above are v1&apos;s. The v2 spec does not
+            restate them, so they can change.
+          </li>
+        </ul>
+      </FromV1>
       <Feedback />
       <Pagination prev={prev} next={next} />
     </DocsShell>

@@ -1,5 +1,5 @@
 import { DocsShell, type TocItem } from "../DocsShell";
-import { Callout, Feedback, H2, Pagination, PageHeader, Table } from "../blocks";
+import { Callout, Feedback, FromV1, H2, Pagination, PageHeader, Table } from "../blocks";
 import { neighbours, type PageEntry } from "../nav";
 
 /*
@@ -19,7 +19,7 @@ const TOC: TocItem[] = [
 export function CheckoutGuard({ page }: { page: PageEntry }) {
   const { prev, next } = neighbours(page.slug);
   return (
-    <DocsShell current={page} toc={TOC}>
+    <DocsShell current={page} toc={TOC} fromV1>
       <PageHeader
         page={page}
         description="The checkout guard notices anything that changes your repository outside the soldiers' worktrees during a turn, and asks you whose change it was."
@@ -27,7 +27,7 @@ export function CheckoutGuard({ page }: { page: PageEntry }) {
       <div className="sd-prose">
         <Callout kind="note">
           <p>
-            Shadow Army 2 is in development. The guard carries over from v1. It covers agy from milestone M2 and every
+            Shadow Army 2 is in development. It covers agy from milestone M2 and every
             soldier from M6.
           </p>
         </Callout>
@@ -97,7 +97,11 @@ export function CheckoutGuard({ page }: { page: PageEntry }) {
         />
         <p>The turn&apos;s summary waits for your answer.</p>
       </div>
-
+      <FromV1>
+        <ul>
+          <li>The checkout guard carries over from v1 (ADR-0013).</li>
+        </ul>
+      </FromV1>
       <Feedback />
       <Pagination prev={prev} next={next} />
     </DocsShell>

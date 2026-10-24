@@ -1,5 +1,5 @@
 import { DocsShell, type TocItem } from "../DocsShell";
-import { Callout, Feedback, H2, Pagination, PageHeader, Table } from "../blocks";
+import { Callout, Feedback, FromV1, H2, Pagination, PageHeader, Table } from "../blocks";
 import { neighbours, type PageEntry } from "../nav";
 
 /*
@@ -19,7 +19,7 @@ const TOC: TocItem[] = [
 export function HardRules({ page }: { page: PageEntry }) {
   const { prev, next } = neighbours(page.slug);
   return (
-    <DocsShell current={page} toc={TOC}>
+    <DocsShell current={page} toc={TOC} fromV1>
       <PageHeader
         page={page}
         description="The rules Shadow Army enforces in code, whatever a config file, a brief or a model says."
@@ -27,7 +27,7 @@ export function HardRules({ page }: { page: PageEntry }) {
       <div className="sd-prose">
         <Callout kind="note">
           <p>
-            Shadow Army 2 is in development. These rules are in its accepted design; most carry over from v1.
+            Shadow Army 2 is in development. These rules are in its accepted design.
           </p>
         </Callout>
 
@@ -100,7 +100,14 @@ export function HardRules({ page }: { page: PageEntry }) {
           </li>
         </ul>
       </div>
-
+      <FromV1>
+        <ul>
+          <li>
+            Most of these rules carry over from v1, among them the two hard rules and the roster files they
+            apply to (ADR-0013).
+          </li>
+        </ul>
+      </FromV1>
       <Feedback />
       <Pagination prev={prev} next={next} />
     </DocsShell>

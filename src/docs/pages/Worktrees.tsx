@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { DocsShell, type TocItem } from "../DocsShell";
-import { Callout, Feedback, H2, Pagination, PageHeader } from "../blocks";
+import { Callout, Feedback, FromV1, H2, Pagination, PageHeader } from "../blocks";
 import { hrefOf, neighbours, type PageEntry } from "../nav";
 
 /*
@@ -21,7 +21,7 @@ const TOC: TocItem[] = [
 export function Worktrees({ page }: { page: PageEntry }) {
   const { prev, next } = neighbours(page.slug);
   return (
-    <DocsShell current={page} toc={TOC}>
+    <DocsShell current={page} toc={TOC} fromV1>
       <PageHeader
         page={page}
         description="Each soldier writes in its own git worktree, so parallel work never collides on disk and your checkout stays yours."
@@ -29,8 +29,7 @@ export function Worktrees({ page }: { page: PageEntry }) {
       <div className="sd-prose">
         <Callout kind="note">
           <p>
-            Shadow Army 2 is in development. Worktrees carry over from v1 and arrive in v2&apos;s last milestone before
-            release (M6). This page describes the accepted design.
+            Shadow Army 2 is in development. Worktrees arrive in v2&apos;s last milestone before release (M6). This page describes the accepted design.
           </p>
         </Callout>
 
@@ -63,12 +62,6 @@ export function Worktrees({ page }: { page: PageEntry }) {
           Work starts from your folder as it is, not from your last commit. A follow-up brief sees changes you applied
           earlier, even before you commit them.
         </p>
-        <Callout kind="tip">
-          <p>
-            v1 started every run from the last commit, so a follow-up goal could not build on uncommitted results. v2
-            fixes that.
-          </p>
-        </Callout>
 
         <H2 id="link-safety">Link safety</H2>
         <p>
@@ -93,7 +86,15 @@ export function Worktrees({ page }: { page: PageEntry }) {
           waits for one.
         </p>
       </div>
-
+      <FromV1>
+        <ul>
+          <li>Worktrees carry over from v1 (ADR-0013).</li>
+          <li>
+            v1 started every run from the last commit, so a follow-up goal could not build on uncommitted results. v2
+            starts work from your folder as it is.
+          </li>
+        </ul>
+      </FromV1>
       <Feedback />
       <Pagination prev={prev} next={next} />
     </DocsShell>
