@@ -7,9 +7,12 @@ import { Army } from "./pages/Army";
 import { Autonomy } from "./pages/Autonomy";
 import { BestPractices } from "./pages/BestPractices";
 import { BriefsAndReports } from "./pages/BriefsAndReports";
+import { BriefFormat } from "./pages/BriefFormat";
 import { Capabilities } from "./pages/Capabilities";
 import { Changelog } from "./pages/Changelog";
+import { CliReference } from "./pages/CliReference";
 import { CommitsAndPrs } from "./pages/CommitsAndPrs";
+import { ConfigSchema } from "./pages/ConfigSchema";
 import { Contributing } from "./pages/Contributing";
 import { Decisions } from "./pages/Decisions";
 import { CheckoutGuard } from "./pages/CheckoutGuard";
@@ -17,6 +20,7 @@ import { AgyCli, ClaudeCli, CodexCli, GrokCli } from "./pages/Clis";
 import { Cost } from "./pages/Cost";
 import { FileClaims } from "./pages/FileClaims";
 import { FirstArmy } from "./pages/FirstArmy";
+import { Glossary } from "./pages/Glossary";
 import { HardRules } from "./pages/HardRules";
 import { HowItWorks } from "./pages/HowItWorks";
 import { ManageSessions } from "./pages/ManageSessions";
@@ -25,6 +29,7 @@ import { NewAdapter } from "./pages/NewAdapter";
 import { OrchestratorDelegate } from "./pages/OrchestratorDelegate";
 import { Pane } from "./pages/Pane";
 import { Quickstart } from "./pages/Quickstart";
+import { ReportFormat } from "./pages/ReportFormat";
 import { Roadmap } from "./pages/Roadmap";
 import { Roles } from "./pages/Roles";
 import { RoutingPolicy } from "./pages/RoutingPolicy";
@@ -85,6 +90,11 @@ export const written: Record<string, ComponentType<{ page: PageEntry }>> = {
   "agent-md": AgentMd,
   models: Models,
   cost: Cost,
+  "cli-reference": CliReference,
+  "config-schema": ConfigSchema,
+  "brief-format": BriefFormat,
+  "report-format": ReportFormat,
+  glossary: Glossary,
   "whats-new": WhatsNew,
   roadmap: Roadmap,
   contributing: Contributing,
