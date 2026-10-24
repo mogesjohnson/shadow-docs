@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { DocsShell, type TocItem } from "../DocsShell";
-import { Callout, Feedback, H2, Pagination, PageHeader, SoldierDot, Table } from "../blocks";
+import { Callout, Feedback, FromV1, H2, Pagination, PageHeader, SoldierDot, Table } from "../blocks";
 import { hrefOf, neighbours, type PageEntry, type Soldier } from "../nav";
 
 /*
@@ -45,7 +45,7 @@ const GUIDE: { soldier: Soldier; id: string; model: string; strong: string; avoi
     soldier: "codex",
     id: "codex-astra",
     model: "gpt-6-astra",
-    strong: "In v2, review and hard builds, as claude-opus. The guide on main still calls it the orchestrator",
+    strong: "Review and hard builds, as claude-opus",
     avoid: "Routine work: its cost is 3",
   },
   {
@@ -67,7 +67,7 @@ const GUIDE: { soldier: Soldier; id: string; model: string; strong: string; avoi
 export function Models({ page }: { page: PageEntry }) {
   const { prev, next } = neighbours(page.slug);
   return (
-    <DocsShell current={page} toc={TOC}>
+    <DocsShell current={page} toc={TOC} fromV1>
       <PageHeader
         page={page}
         description="Each soldier is one CLI and one model. Pick the model for the work, and the effort for the difficulty."
@@ -152,6 +152,20 @@ export function Models({ page }: { page: PageEntry }) {
           <Link href={hrefOf("cost")}>Cost and tokens</Link>.
         </p>
       </div>
+
+      <FromV1>
+        <ul>
+          <li>
+            In v1 codex-astra was the Monarch, planning each goal, with claude-opus as its fallback. The guide on{" "}
+            <code>main</code> still calls codex-astra the primary orchestrator and claude-opus the second. In v2
+            Claude is the Monarch, and codex-astra takes reviews and hard builds.
+          </li>
+          <li>
+            The models and the effort guide are the files&apos; own, unchanged. The <code>handoffAt</code> line and
+            the cold estimate are new in v2.
+          </li>
+        </ul>
+      </FromV1>
 
       <Feedback />
       <Pagination prev={prev} next={next} />

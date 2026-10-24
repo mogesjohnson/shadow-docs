@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { DocsShell, type TocItem } from "../DocsShell";
-import { Callout, CodeBlock, Feedback, H2, Pagination, PageHeader } from "../blocks";
+import { Callout, CodeBlock, Feedback, FromV1, H2, Pagination, PageHeader } from "../blocks";
 import { hrefOf, neighbours, type PageEntry } from "../nav";
 
 /*
@@ -20,7 +20,7 @@ const TOC: TocItem[] = [
 export function AgentMd({ page }: { page: PageEntry }) {
   const { prev, next } = neighbours(page.slug);
   return (
-    <DocsShell current={page} toc={TOC}>
+    <DocsShell current={page} toc={TOC} fromV1>
       <PageHeader
         page={page}
         description="Rules for one soldier at a time, added to its standing instructions after rules.md."
@@ -28,8 +28,7 @@ export function AgentMd({ page }: { page: PageEntry }) {
       <div className="sd-prose">
         <Callout kind="note">
           <p>
-            Shadow Army 2 is in development. <code>agent.md</code> carries over from v1, and the sections below are
-            the ones on <code>main</code>.
+            Shadow Army 2 is in development. The sections below are the file shipped on <code>main</code>.
           </p>
         </Callout>
 
@@ -77,7 +76,7 @@ export function AgentMd({ page }: { page: PageEntry }) {
         <ul>
           <li>A section for a soldier that is not in the roster is an error.</li>
           <li>Two sections for the same soldier are an error.</li>
-          <li>v1&apos;s loader refuses a section over 2,000 characters.</li>
+          <li>A section over 2,000 characters is refused.</li>
         </ul>
         <p>
           A file in the folder you work in wins over the one shipped with the package, as with{" "}
@@ -100,6 +99,14 @@ export function AgentMd({ page }: { page: PageEntry }) {
           </li>
         </ul>
       </div>
+
+      <FromV1>
+        <p>
+          <code>agent.md</code> is v1&apos;s file, and v2 keeps it and its sections unchanged. The checks and the
+          2,000-character limit are v1&apos;s loader, which v2 reads the file with. What is new in v2 is how a section
+          arrives: once per session, inside standing instructions capped at 1,500 tokens.
+        </p>
+      </FromV1>
 
       <Feedback />
       <Pagination prev={prev} next={next} />

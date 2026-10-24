@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { DocsShell, type TocItem } from "../DocsShell";
-import { Callout, CodeBlock, Feedback, H2, Pagination, PageHeader, Table } from "../blocks";
+import { Callout, CodeBlock, Feedback, FromV1, H2, Pagination, PageHeader, Table } from "../blocks";
 import { hrefOf, neighbours, type PageEntry } from "../nav";
 
 /*
@@ -15,23 +15,23 @@ const TOC: TocItem[] = [
   { id: "what-it-holds", title: "What it holds" },
   { id: "where-it-is-read", title: "Where it is read from" },
   { id: "keys", title: "Keys for each soldier" },
-  { id: "v2-keys", title: "Keys v2 adds" },
+  { id: "session-keys", title: "Session and summary keys" },
   { id: "plugins", title: "Plugins and connectors" },
 ];
 
 export function ShadowConfig({ page }: { page: PageEntry }) {
   const { prev, next } = neighbours(page.slug);
   return (
-    <DocsShell current={page} toc={TOC}>
+    <DocsShell current={page} toc={TOC} fromV1>
       <PageHeader
         page={page}
-        description="How each soldier runs: which CLI, which model, how freely it acts, and from v2 its handoff line, cache lifetime, tag and test commands."
+        description="How each soldier runs: which CLI, which model, how freely it acts, its handoff line, cache lifetime, tag and test commands."
       />
       <div className="sd-prose">
         <Callout kind="note">
           <p>
-            Shadow Army 2 is in development. The file carries over from v1; the keys v2 adds arrive with milestone M4
-            and their exact format is set at release.
+            Shadow Army 2 is in development. <code>handoffAt</code>, <code>cacheLifetime</code>, <code>tag</code>{" "}
+            and <code>tests</code> arrive with milestone M4, and their exact format is set at release.
           </p>
         </Callout>
 
@@ -64,8 +64,9 @@ export function ShadowConfig({ page }: { page: PageEntry }) {
         />
         <p>
           Each key under <code>soldiers</code> is the soldier&apos;s roster id. Its shadow name defaults from that id:
-          Bellion codex-astra, Igris codex-sol, Kaisel claude-opus, Tank claude-opus-build (a soldier the file on{" "}
-          <code>main</code> does not list), Iron claude-sonnet, Beru grok and Tusk agy. Names can be configured.
+          Bellion codex-astra, Igris codex-sol, Kaisel claude-opus, Tank claude-opus-build, Iron claude-sonnet, Beru
+          grok and Tusk agy. Names can be configured. Tank is a default name only: no shipped file defines a
+          claude-opus-build soldier yet.
         </p>
 
         <H2 id="where-it-is-read">Where it is read from</H2>
@@ -105,7 +106,8 @@ export function ShadowConfig({ page }: { page: PageEntry }) {
           ]}
         />
 
-        <H2 id="v2-keys">Keys v2 adds</H2>
+        <H2 id="session-keys">Session and summary keys</H2>
+        <p>Each is optional and set per soldier, next to its <code>cli</code> and <code>model</code>:</p>
         <Table
           head={["Key", "What it does"]}
           rows={[
@@ -149,6 +151,19 @@ export function ShadowConfig({ page }: { page: PageEntry }) {
           that resumes the same session.
         </p>
       </div>
+
+      <FromV1>
+        <ul>
+          <li>
+            v1&apos;s file had <code>cli</code>, <code>model</code> and <code>autonomy</code>. v2 keeps all three as
+            they were, and reads the file with the same loader and its path-named errors.
+          </li>
+          <li>
+            v2 adds <code>handoffAt</code>, <code>cacheLifetime</code>, <code>tag</code> and <code>tests</code>. The
+            file shipped on <code>main</code> is still v1&apos;s, so it sets none of them.
+          </li>
+        </ul>
+      </FromV1>
 
       <Feedback />
       <Pagination prev={prev} next={next} />

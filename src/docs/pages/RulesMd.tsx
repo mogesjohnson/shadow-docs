@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { DocsShell, type TocItem } from "../DocsShell";
-import { Callout, Feedback, H2, Pagination, PageHeader } from "../blocks";
+import { Callout, Feedback, FromV1, H2, Pagination, PageHeader } from "../blocks";
 import { hrefOf, neighbours, type PageEntry } from "../nav";
 
 /*
@@ -34,7 +34,7 @@ const RULES = [
 export function RulesMd({ page }: { page: PageEntry }) {
   const { prev, next } = neighbours(page.slug);
   return (
-    <DocsShell current={page} toc={TOC}>
+    <DocsShell current={page} toc={TOC} fromV1>
       <PageHeader
         page={page}
         description="The rules every soldier follows, whatever its brief says. They go into each soldier's standing instructions once per session."
@@ -42,8 +42,8 @@ export function RulesMd({ page }: { page: PageEntry }) {
       <div className="sd-prose">
         <Callout kind="note">
           <p>
-            Shadow Army 2 is in development. <code>rules.md</code> carries over from v1, and its text below is the one
-            on <code>main</code>.
+            Shadow Army 2 is in development. The rules below are the text of the file shipped on <code>main</code>,
+            word for word.
           </p>
         </Callout>
 
@@ -60,10 +60,6 @@ export function RulesMd({ page }: { page: PageEntry }) {
             <li key={rule}>{rule}</li>
           ))}
         </ol>
-        <p>
-          Rule 9 on <code>main</code> says to name the problem in <code>openQuestions</code>, a field of v1&apos;s
-          report. In v2 a soldier says it in its reply.
-        </p>
         <Callout kind="warning">
           <p>
             Rules are instructions. What enforces them is Shadow Army: the claim audit reverts files outside a
@@ -106,11 +102,25 @@ export function RulesMd({ page }: { page: PageEntry }) {
 
         <H2 id="limits">Size limits</H2>
         <p>
-          Every session carries these rules, so they stay small. v1&apos;s loader refuses a <code>rules.md</code> over
-          4,000 characters. v2 keeps the whole standing instructions under 1,500 tokens; they measured about 1,000 on
-          7 October 2026.
+          Every session carries these rules, so they stay small. The whole standing instructions stay under 1,500
+          tokens; they measured about 1,000 on 7 October 2026. The loader also refuses a <code>rules.md</code> over
+          4,000 characters.
         </p>
       </div>
+
+      <FromV1>
+        <ul>
+          <li>
+            <code>rules.md</code> is v1&apos;s file, and v2 keeps it. Rule 9 still says to name the problem in{" "}
+            <code>openQuestions</code>, a field of v1&apos;s report. v2 has no such field: a soldier replies in at most
+            five lines, and the whole reply is saved as the report.
+          </li>
+          <li>
+            The 4,000-character limit is v1&apos;s loader, which v2 reads the file with. The 1,500-token limit on the
+            whole standing instructions is new in v2.
+          </li>
+        </ul>
+      </FromV1>
 
       <Feedback />
       <Pagination prev={prev} next={next} />

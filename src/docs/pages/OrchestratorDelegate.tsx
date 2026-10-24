@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { DocsShell, type TocItem } from "../DocsShell";
-import { Callout, CodeBlock, Feedback, H2, Pagination, PageHeader, Table } from "../blocks";
+import { Callout, CodeBlock, Feedback, FromV1, H2, Pagination, PageHeader, Table } from "../blocks";
 import { hrefOf, neighbours, type PageEntry } from "../nav";
 
 /*
@@ -15,13 +15,12 @@ const TOC: TocItem[] = [
   { id: "front-matter", title: "The front matter" },
   { id: "checks", title: "What is checked" },
   { id: "guide", title: "The guide" },
-  { id: "v1-keys", title: "What v2 ignores" },
 ];
 
 export function OrchestratorDelegate({ page }: { page: PageEntry }) {
   const { prev, next } = neighbours(page.slug);
   return (
-    <DocsShell current={page} toc={TOC}>
+    <DocsShell current={page} toc={TOC} fromV1>
       <PageHeader
         page={page}
         description="Who may do what: each soldier's roles, cost and limits, and a guide Claude reads when it picks who gets a brief."
@@ -29,9 +28,8 @@ export function OrchestratorDelegate({ page }: { page: PageEntry }) {
       <div className="sd-prose">
         <Callout kind="note">
           <p>
-            Shadow Army 2 is in development. The file and its routing carry over from v1. The file on{" "}
-            <code>main</code> is still v1&apos;s, so it has the <code>monarch</code> block and the{" "}
-            <code>orchestrate</code> role that v2 ignores.
+            Shadow Army 2 is in development. The front matter below is an excerpt of the file shipped on{" "}
+            <code>main</code>.
           </p>
         </Callout>
 
@@ -60,21 +58,20 @@ export function OrchestratorDelegate({ page }: { page: PageEntry }) {
               lines: [
                 "---",
                 "soldiers:",
-                "  claude-opus:",
-                "    roles: [review, build]",
-                "    cost: 3",
-                "    buildFor: [hard]",
+                "  codex-sol:",
+                "    roles: [build]",
+                "    cost: 2",
                 "  claude-sonnet:",
                 "    roles: [build]",
                 "    cost: 1",
                 "  grok:",
                 "    roles: [build]",
                 "    cost: 1",
-                "    forbidden: [review]",
+                "    forbidden: [review]       # hard rule",
                 "  agy:",
                 "    roles: [research, test]",
                 "    cost: 1",
-                "    write: false",
+                "    write: false              # hard rule: launched read-only, claim audit rejects any edit",
                 "---",
               ],
             },
@@ -109,6 +106,10 @@ export function OrchestratorDelegate({ page }: { page: PageEntry }) {
             ],
           ]}
         />
+        <p>
+          claude-opus (Kaisel) and codex-astra (Bellion) both take reviews and hard builds, at cost 3. claude-opus
+          has <code>buildFor: [hard]</code>, and codex-astra is listed after it.
+        </p>
 
         <H2 id="checks">What is checked</H2>
         <p>
@@ -141,19 +142,27 @@ export function OrchestratorDelegate({ page }: { page: PageEntry }) {
           <Link href={hrefOf("routing-policy")}>Routing policy</Link>.
         </p>
 
-        <H2 id="v1-keys">What v2 ignores</H2>
+      </div>
+
+      <FromV1>
         <ul>
           <li>
-            The <code>monarch</code> block (<code>default</code> and <code>fallback</code>). Claude is the Monarch.
+            The file shipped on <code>main</code> is still v1&apos;s. Its <code>monarch</code> block (
+            <code>default: codex-astra</code>, <code>fallback: claude-opus</code>) and its <code>orchestrate</code>{" "}
+            role mean nothing in v2: Claude is the Monarch, and no brief asks for orchestration.
           </li>
           <li>
-            The <code>orchestrate</code> role. No brief asks for orchestration, so no soldier takes it.
+            In that file codex-astra has only the <code>orchestrate</code> role. Giving it reviews and hard builds is
+            v2&apos;s, and the shipped file does not say so yet. The excerpt above leaves out both soldiers&apos;
+            entries for that reason.
           </li>
+          <li>
+            The guide&apos;s headings still call codex-astra the primary orchestrator and claude-opus the second,
+            and say the Monarch reads the file before every dispatch. In v2 Claude reads it.
+          </li>
+          <li>The keys, their checks and the hard rules are v1&apos;s, unchanged.</li>
         </ul>
-        <p>
-          v2 gives codex-astra (Bellion) review and hard builds, as claude-opus has, and lists it after claude-opus.
-        </p>
-      </div>
+      </FromV1>
 
       <Feedback />
       <Pagination prev={prev} next={next} />

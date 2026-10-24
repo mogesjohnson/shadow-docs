@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { DocsShell, type TocItem } from "../DocsShell";
-import { Callout, CodeBlock, Feedback, H2, Pagination, PageHeader, Table } from "../blocks";
+import { Callout, CodeBlock, Feedback, FromV1, H2, Pagination, PageHeader, Table } from "../blocks";
 import { hrefOf, neighbours, type PageEntry } from "../nav";
 
 /*
@@ -20,7 +20,7 @@ const TOC: TocItem[] = [
 export function Cost({ page }: { page: PageEntry }) {
   const { prev, next } = neighbours(page.slug);
   return (
-    <DocsShell current={page} toc={TOC}>
+    <DocsShell current={page} toc={TOC} fromV1>
       <PageHeader
         page={page}
         description="Token use is visible and in your hands: a meter for each soldier, a cold-cache warning, the 200k handoff and a usage table."
@@ -35,19 +35,10 @@ export function Cost({ page }: { page: PageEntry }) {
 
         <H2 id="where-tokens-go">Where the tokens go</H2>
         <p>
-          v1 started a new CLI process for every message, and a separate Monarch CLI planned each goal. A simple
-          one-task goal cost about 125k tokens: two Monarch calls (about 62k) and one soldier task (about 65k).
-          Shadow Army&apos;s own text was about 2k of that. The rest is each CLI&apos;s own setup, sent again on every
-          model request:
+          Most of each model request is the CLI&apos;s own setup: its system prompt, tools, skills and MCP servers,
+          sent again on every request. Shadow Army&apos;s own part is small: each soldier&apos;s standing instructions
+          stay under 1,500 tokens and are sent once per session.
         </p>
-        <Table
-          head={["CLI, as v1 launches it", "Tokens per request"]}
-          rows={[
-            ["claude", "31.5k"],
-            ["codex", "20.1k"],
-            ["grok", "about 23k"],
-          ]}
-        />
         <p>
           Shadow Army never trims a vendor&apos;s harness to save tokens: the harness carries the vendor&apos;s
           safeguards.
@@ -71,8 +62,8 @@ export function Cost({ page }: { page: PageEntry }) {
           <li>A live session costs the same as the CLI&apos;s own run, within about 5%.</li>
           <li>Every live follow-up was answered without re-reading the files.</li>
           <li>
-            The savings come from keeping sessions open, dropping the separate Monarch calls, and not starting a
-            process for every message.
+            The savings come from keeping each session open, with no process started per message, and from Claude
+            planning as the Monarch in its own session.
           </li>
           <li>
             Only briefs and short summaries cross between models. Full reports stay on disk, where they cost no
@@ -123,6 +114,28 @@ export function Cost({ page }: { page: PageEntry }) {
           </li>
         </ul>
       </div>
+
+      <FromV1>
+        <p>
+          v1 started a new CLI process for every message, and a separate Monarch CLI planned each goal. A simple
+          one-task goal cost about 125k tokens: two Monarch calls (about 62k) and one soldier task (about 65k).
+          Shadow Army&apos;s own text was about 2k of that; the rest was each CLI&apos;s own setup, sent on every
+          request:
+        </p>
+        <Table
+          head={["CLI, as v1 launched it", "Tokens per request"]}
+          rows={[
+            ["claude", "31.5k"],
+            ["codex", "20.1k"],
+            ["grok", "about 23k"],
+          ]}
+        />
+        <p>
+          v2 keeps one live session per soldier and has Claude plan as the Monarch, so the separate Monarch calls and
+          the process per message are gone. The meter, the cold warning, the 200k handoff and{" "}
+          <code>/sessions</code> are new in v2.
+        </p>
+      </FromV1>
 
       <Feedback />
       <Pagination prev={prev} next={next} />
