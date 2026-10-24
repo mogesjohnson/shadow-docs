@@ -5,10 +5,10 @@ import { hrefOf, neighbours, type PageEntry } from "../nav";
 
 /*
  * Sources (shadow-army main at ab04992): shadow.config.json,
- * src/core/config.ts and src/core/roster.ts (v1's loader, which v2 carries
- * over), docs/spec/v2.md v0.5 (ARM-1, ARM-3, SES-6, SES-8, SET-1, SET-2,
- * VIS-6 and the tests line of the summary card) and docs/claude-first.md.
- * Shadow Army 2 is not released yet.
+ * src/core/config.ts and src/core/roster.ts (v1's loader, which v2
+ * carries over), docs/spec/v2.md v0.5 (ARM-1, ARM-3, SES-6, SES-8, SET-1,
+ * SET-2, VIS-6, the tests line of the summary card, and milestones M4 to
+ * M6) and docs/claude-first.md. Shadow Army 2 is not released yet.
  */
 
 const TOC: TocItem[] = [
@@ -30,8 +30,9 @@ export function ShadowConfig({ page }: { page: PageEntry }) {
       <div className="sd-prose">
         <Callout kind="note">
           <p>
-            Shadow Army 2 is in development. <code>handoffAt</code>, <code>cacheLifetime</code>, <code>tag</code>{" "}
-            and <code>tests</code> arrive with milestone M4, and their exact format is set at release.
+            Shadow Army 2 is in development. <code>handoffAt</code> and <code>cacheLifetime</code> arrive with
+            milestone M4, <code>tag</code> with M5 and <code>tests</code> with M6. Their exact format is set at
+            release.
           </p>
         </Callout>
 

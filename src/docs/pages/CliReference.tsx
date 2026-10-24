@@ -7,8 +7,8 @@ import { hrefOf, neighbours, type PageEntry } from "../nav";
  * Sources (shadow-army main at ab04992): docs/spec/v2.md v0.5 (HOST-5,
  * HOST-6, HOST-9, HOST-10, MSG-8, WSP-9) for the commands, keys and tool;
  * src/cli.ts, src/vault/cli.ts, src/workspace/cli.ts, src/monarch/cli.ts
- * and src/chat/commands.ts for v1's `sa` commands. Shadow Army 2 is not
- * released yet.
+ * and src/chat/commands.ts for v1's `sa` commands; ADR-0013 for v1's
+ * frozen release and branch. Shadow Army 2 is not released yet.
  */
 
 const TOC: TocItem[] = [
@@ -224,8 +224,8 @@ export function CliReference({ page }: { page: PageEntry }) {
 
       <FromV1>
         <p>
-          v1 is a separate <code>sa</code> program, frozen at the <code>v1.0.0</code> tag and kept in{" "}
-          <code>v1.0.x</code>. It starts a new process for every message, and v2 does not use it. Its commands:
+          v1 is a separate <code>sa</code> program, frozen at its <code>v1.0.1</code> release on the{" "}
+          <code>legacy/v1</code> branch. It starts a new process for every message, and v2 does not use it. Its commands:
         </p>
         <H3 id="v1-commands">v1 commands</H3>
         <Table
