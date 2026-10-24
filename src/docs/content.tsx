@@ -9,6 +9,9 @@ import { BestPractices } from "./pages/BestPractices";
 import { BriefsAndReports } from "./pages/BriefsAndReports";
 import { Capabilities } from "./pages/Capabilities";
 import { Changelog } from "./pages/Changelog";
+import { CommitsAndPrs } from "./pages/CommitsAndPrs";
+import { Contributing } from "./pages/Contributing";
+import { Decisions } from "./pages/Decisions";
 import { CheckoutGuard } from "./pages/CheckoutGuard";
 import { AgyCli, ClaudeCli, CodexCli, GrokCli } from "./pages/Clis";
 import { Cost } from "./pages/Cost";
@@ -32,6 +35,8 @@ import { ShadowConfig } from "./pages/ShadowConfig";
 import { ShadowVault } from "./pages/ShadowVault";
 import { Snapshots } from "./pages/Snapshots";
 import { Soldiers } from "./pages/Soldiers";
+import { Spec } from "./pages/Spec";
+import { Support } from "./pages/Support";
 import { SoldiersOverview } from "./pages/SoldiersOverview";
 import { Steer } from "./pages/Steer";
 import { TheMonarch } from "./pages/TheMonarch";
@@ -82,4 +87,9 @@ export const written: Record<string, ComponentType<{ page: PageEntry }>> = {
   cost: Cost,
   "whats-new": WhatsNew,
   roadmap: Roadmap,
+  contributing: Contributing,
+  "commits-and-prs": CommitsAndPrs,
+  decisions: Decisions,
+  spec: Spec,
+  support: Support,
 };
