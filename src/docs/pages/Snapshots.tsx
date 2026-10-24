@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { DocsShell, type TocItem } from "../DocsShell";
-import { Callout, Feedback, H2, Pagination, PageHeader } from "../blocks";
+import { Callout, Feedback, FromV1, H2, Pagination, PageHeader } from "../blocks";
 import { hrefOf, neighbours, type PageEntry } from "../nav";
 
 /*
@@ -14,13 +14,12 @@ const TOC: TocItem[] = [
   { id: "what-a-snapshot-is", title: "What a snapshot is" },
   { id: "agy", title: "Why agy always runs in one" },
   { id: "read-violations", title: "Read-violations" },
-  { id: "in-v1", title: "In v1" },
 ];
 
 export function Snapshots({ page }: { page: PageEntry }) {
   const { prev, next } = neighbours(page.slug);
   return (
-    <DocsShell current={page} toc={TOC}>
+    <DocsShell current={page} toc={TOC} fromV1>
       <PageHeader
         page={page}
         description="A read-only snapshot is a throwaway copy of a soldier's base. Whatever a soldier writes there is discarded and reported."
@@ -37,7 +36,7 @@ export function Snapshots({ page }: { page: PageEntry }) {
         <p>
           A snapshot is a copy of the soldier&apos;s base that never merges anywhere. The soldier can read it and run
           things in it, but nothing it writes reaches a branch or your folder. A snapshot is deleted link-safely, like a
-          worktree.
+          worktree. Only agy runs in one; other soldiers work in their own worktrees.
         </p>
 
         <H2 id="agy">Why agy always runs in one</H2>
@@ -60,13 +59,15 @@ export function Snapshots({ page }: { page: PageEntry }) {
           thrown away and reported. If an agy turn changes your checkout and you answer n on the guard&apos;s
           attribution card, the turn fails as a read-violation too.
         </p>
-
-        <H2 id="in-v1">In v1</H2>
-        <p>
-          v1 also used throwaway copies for any soldier at <code>auto</code> or <code>full</code> autonomy on a
-          read-only task. v2&apos;s spec requires snapshots for agy; other soldiers work in their own worktrees.
-        </p>
       </div>
+      <FromV1>
+        <ul>
+          <li>
+            v1 also used throwaway copies for any soldier at <code>auto</code> or <code>full</code> autonomy on a
+            read-only task. v2 requires snapshots for agy only.
+          </li>
+        </ul>
+      </FromV1>
 
       <Feedback />
       <Pagination prev={prev} next={next} />
