@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PlaceholderPage } from "../../../docs/PlaceholderPage";
+import { written } from "../../../docs/content";
 import { findPage, pages } from "../../../docs/nav";
 
 export const dynamicParams = false;
@@ -19,5 +20,6 @@ export default async function Page({ params }: PageProps<"/shadow-docs/[slug]">)
   const { slug } = await params;
   const page = findPage(slug);
   if (!page || slug === "overview") notFound();
-  return <PlaceholderPage page={page} />;
+  const Written = written[slug];
+  return Written ? <Written page={page} /> : <PlaceholderPage page={page} />;
 }

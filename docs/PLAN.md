@@ -5,10 +5,15 @@ A documentation site for Shadow Army (`sa`), laid out the way the Claude Code do
 ## Owner choices
 
 - **Layout copied from the Claude Code docs, by request.** Taken: the layout pattern (top bar, tab row, left sidebar, right "On this page" rail, page header with "Copy page", content components, feedback row, pagination, footer). Not taken: markup, copy, fonts, icons, logos or other Anthropic assets. Everything is rebuilt in our own code. On the portfolio this overrides its factory rule R3.
-- **No copy yet.** Every paragraph is a visible placeholder block.
+- **Copy, one tab at a time.** The skeleton had no copy. Pages listed in `src/docs/content.tsx` now have it; every other paragraph is still a visible placeholder block.
 - **Its own repo** (2026-10-23): `mogesjohnson/shadow-docs`, included in the portfolio as a submodule.
 - **No "Ask the Monarch"** (2026-10-23): the assistant button, its Ctrl I shortcut and its panel were removed.
 - **The real logo** (2026-10-23): from the "Shadow Army Terminal UI" design canvas, not a drawn mark.
+- **v2 only, no version badge** (2026-10-23): the docs describe Shadow Army 2 and say plainly that it is in development. Copy comes from shadow-army `main` (spec v0.5, ADRs 0008 to 0015, `docs/claude-first.md`), not from the open spec review.
+- **Tabs approved** (2026-10-23): the seven tabs in `nav.ts` stay.
+- **Linked from the portfolio header** (2026-10-23).
+- **Quickstart written now** (2026-10-23): from the spec, marked as planned, until v2 has an install command.
+- **"Use Shadow Army" renamed for v2** (2026-10-23): `sa summon`, `sa run` and the live dashboard are v1 features that v2 removes. The group now covers `/army`, `/send`, the pane and the strip, stopping and the queue, sessions, and `/diff` and `/apply`.
 
 ## What was measured on the reference page (2026-10-23)
 

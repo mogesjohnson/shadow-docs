@@ -50,11 +50,12 @@ export const tabs: DocTab[] = [
       {
         title: "Use Shadow Army",
         pages: [
-          { slug: "army", title: "See your army", nav: "sa army" },
-          { slug: "summon", title: "Summon a soldier", nav: "sa summon" },
-          { slug: "run", title: "Run a plan", nav: "sa run" },
-          { slug: "live-dashboard", title: "Live dashboard" },
-          { slug: "apply-changes", title: "Apply a run's changes" },
+          { slug: "army", title: "See your army", nav: "/army" },
+          { slug: "send", title: "Send work", nav: "/send" },
+          { slug: "pane", title: "The pane and the strip" },
+          { slug: "steer", title: "Stop, queue and decide" },
+          { slug: "manage-sessions", title: "Manage sessions" },
+          { slug: "apply-changes", title: "Apply a soldier's changes", nav: "/diff and /apply" },
           { slug: "best-practices", title: "Best practices" },
         ],
       },

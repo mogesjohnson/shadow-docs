@@ -409,10 +409,79 @@
   flex: 0 0 var(--sd-rail-w);
 }
 
-.sd-toc {
+.sd-rail-inner {
   position: sticky;
   top: calc(var(--sd-head-h) + 40px);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.sd-toc {
   font-size: 13px;
+}
+.sd-rail-history {
+  display: flex;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid var(--sd-edge);
+  border-radius: 10px;
+  font-size: 13px;
+  color: var(--sd-muted);
+}
+.sd-rail-history svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--sd-accent);
+}
+.sd-rail-history:hover {
+  border-color: var(--sd-accent);
+  color: var(--sd-text);
+}
+.sd-rail-history-title {
+  display: block;
+  font-weight: 600;
+  color: var(--sd-text);
+}
+.sd-rail-history-text {
+  display: block;
+  margin-top: 2px;
+}
+
+/* The v1 history at a page's end, set apart from its v2 copy */
+.sd-from-v1 {
+  margin: 48px 0 8px;
+  padding: 4px 20px 8px;
+  border: 1px dashed var(--sd-edge);
+  border-radius: 14px;
+  background: var(--sd-surface);
+  scroll-margin-top: calc(var(--sd-head-h) + 24px);
+}
+.sd-from-v1-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 16px 0 4px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--sd-text);
+}
+.sd-from-v1-title svg {
+  color: var(--sd-accent);
+}
+.sd-from-v1-body {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--sd-muted);
+}
+.sd-from-v1-body code {
+  font-family: var(--sd-mono);
+  font-size: 0.88em;
+  padding: 1px 5px;
+  border-radius: 5px;
+  background: var(--sd-surface-2);
+}
+.sd-from-v1-body a {
+  color: var(--sd-accent);
 }
 .sd-toc-title {
   margin: 0 0 8px;
@@ -595,6 +664,12 @@
   height: 9px;
   border-radius: 5px;
   background: var(--sd-ph);
+}
+.sd-description p {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--sd-muted);
 }
 .sd-description .sd-ph {
   margin: 0;
@@ -1196,4 +1271,64 @@
   .sd-root * {
     transition: none !important;
   }
+}
+
+/* ------------------------------------------------------------------ */
+/* Prose                                                                */
+/* ------------------------------------------------------------------ */
+
+.sd-prose p,
+.sd-prose li {
+  font-size: 15.5px;
+  line-height: 1.7;
+}
+.sd-prose p {
+  margin: 0 0 14px;
+}
+.sd-prose ul,
+.sd-prose ol {
+  margin: 0 0 16px;
+  padding-left: 22px;
+}
+.sd-prose li + li {
+  margin-top: 4px;
+}
+.sd-prose code {
+  font-family: var(--sd-mono);
+  font-size: 0.88em;
+  padding: 1px 5px;
+  border-radius: 5px;
+  background: var(--sd-surface-2);
+}
+.sd-prose a {
+  color: var(--sd-accent);
+}
+.sd-prose .sd-callout-body p {
+  margin: 10px 0 8px;
+}
+.sd-prose .sd-table td {
+  white-space: normal;
+}
+.sd-card-text {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--sd-muted);
+}
+.sd-prose .sd-card {
+  color: inherit;
+  text-decoration: none;
+}
+.sd-accordion-body p,
+.sd-accordion-body li {
+  font-size: 15px;
+  line-height: 1.65;
+}
+.sd-accordion-body p {
+  margin: 0 0 12px;
+}
+.sd-prose pre code {
+  padding: 0;
+  border-radius: 0;
+  background: none;
+  font-size: inherit;
 }

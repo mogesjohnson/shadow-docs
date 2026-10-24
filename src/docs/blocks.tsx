@@ -11,6 +11,7 @@ import {
   ChevronRight,
   Copy,
   FileText,
+  History,
   Info,
   Lightbulb,
   Link2,
@@ -60,7 +61,7 @@ export function SoldierDot({ soldier }: { soldier: Soldier }) {
 /* Page header                                                          */
 /* ------------------------------------------------------------------ */
 
-export function PageHeader({ page }: { page: PageEntry }) {
+export function PageHeader({ page, description }: { page: PageEntry; description?: string }) {
   return (
     <header className="sd-page-header">
       <div className="sd-page-header-row">
@@ -72,7 +73,7 @@ export function PageHeader({ page }: { page: PageEntry }) {
         {page.title}
       </h1>
       <div className="sd-description">
-        <Ph label="page description, one sentence" lines={2} />
+        {description ? <p>{description}</p> : <Ph label="page description, one sentence" lines={2} />}
       </div>
     </header>
   );
@@ -163,13 +164,22 @@ const CALLOUT_ICON: Record<CalloutKind, LucideIcon> = {
   danger: OctagonAlert,
 };
 
-export function Callout({ kind = "note", label }: { kind?: CalloutKind; label: string }) {
+/** Pass children for real copy; `label` alone draws a placeholder. */
+export function Callout({
+  kind = "note",
+  label,
+  children,
+}: {
+  kind?: CalloutKind;
+  label?: string;
+  children?: ReactNode;
+}) {
   const Icon = CALLOUT_ICON[kind];
   return (
     <div className={`sd-callout sd-callout-${kind}`}>
       <Icon size={16} className="sd-callout-icon" aria-hidden="true" />
       <div className="sd-callout-body">
-        <Ph label={`${kind}: ${label}`} lines={2} />
+        {children ?? <Ph label={`${kind}: ${label ?? "callout"}`} lines={2} />}
       </div>
     </div>
   );
@@ -217,7 +227,14 @@ export function Tabs({ items }: { items: { label: string; content: ReactNode }[]
 }
 
 /** A code group. Each variant shows placeholder comment lines until real commands land. */
-export function CodeBlock({ variants }: { variants: { label: string; lines: string[] }[] }) {
+/** `placeholder` (the default) marks each line as copy still to be written. */
+export function CodeBlock({
+  variants,
+  placeholder = true,
+}: {
+  variants: { label: string; lines: string[] }[];
+  placeholder?: boolean;
+}) {
   const [active, setActive] = useState(0);
   const current = variants[active];
   return (
@@ -245,7 +262,7 @@ export function CodeBlock({ variants }: { variants: { label: string; lines: stri
         <code>
           {current.lines.map((line, i) => (
             <span key={i} className="sd-code-line">
-              <span className="sd-code-comment"># placeholder: {line}</span>
+              {placeholder ? <span className="sd-code-comment"># placeholder: {line}</span> : line}
               {"\n"}
             </span>
           ))}
@@ -259,7 +276,16 @@ export function CodeBlock({ variants }: { variants: { label: string; lines: stri
 /* Accordions, cards, tables                                            */
 /* ------------------------------------------------------------------ */
 
-export function Accordion({ title, icon: Icon }: { title: string; icon?: LucideIcon }) {
+/** Pass children for real copy; without them the body is a placeholder. */
+export function Accordion({
+  title,
+  icon: Icon,
+  children,
+}: {
+  title: string;
+  icon?: LucideIcon;
+  children?: ReactNode;
+}) {
   return (
     <details className="sd-accordion">
       <summary className="sd-accordion-summary">
@@ -268,21 +294,32 @@ export function Accordion({ title, icon: Icon }: { title: string; icon?: LucideI
         <span>{title}</span>
       </summary>
       <div className="sd-accordion-body">
-        <Ph label={`${title}: what it does and an example prompt`} lines={3} />
+        {children ?? <Ph label={`${title}: what it does and an example prompt`} lines={3} />}
       </div>
     </details>
   );
 }
 
-export function CardGrid({ cards }: { cards: { title: string; slug: string; icon: LucideIcon }[] }) {
+/** A card with `text` shows it; one without shows placeholder lines. */
+export function CardGrid({
+  cards,
+}: {
+  cards: { title: string; slug: string; icon: LucideIcon; text?: string }[];
+}) {
   return (
     <div className="sd-cards">
-      {cards.map(({ title, slug, icon: Icon }) => (
+      {cards.map(({ title, slug, icon: Icon, text }) => (
         <Link key={slug} href={hrefOf(slug)} className="sd-card">
           <Icon size={20} className="sd-card-icon" aria-hidden="true" />
           <span className="sd-card-title">{title}</span>
-          <span className="sd-ph-line sd-card-line" />
-          <span className="sd-ph-line sd-card-line sd-card-line-short" />
+          {text ? (
+            <span className="sd-card-text">{text}</span>
+          ) : (
+            <>
+              <span className="sd-ph-line sd-card-line" />
+              <span className="sd-ph-line sd-card-line sd-card-line-short" />
+            </>
+          )}
         </Link>
       ))}
     </div>
@@ -319,6 +356,25 @@ export function Table({ head, rows }: { head: string[]; rows: ReactNode[][] }) {
 /* ------------------------------------------------------------------ */
 /* Page end                                                             */
 /* ------------------------------------------------------------------ */
+
+/** Anchor of the "From v1 to v2" section; the right rail links to it. */
+export const FROM_V1_ID = "from-v1";
+
+/**
+ * How this page's subject grew from v1, kept after the page's v2 copy so the
+ * main text describes v2 only. Pair it with `fromV1` on DocsShell.
+ */
+export function FromV1({ children }: { children: ReactNode }) {
+  return (
+    <section className="sd-from-v1" aria-labelledby={FROM_V1_ID}>
+      <h2 id={FROM_V1_ID} className="sd-from-v1-title">
+        <History size={16} aria-hidden="true" />
+        From v1 to v2
+      </h2>
+      <div className="sd-from-v1-body">{children}</div>
+    </section>
+  );
+}
 
 export function Feedback() {
   const [vote, setVote] = useState<"yes" | "no" | null>(null);
