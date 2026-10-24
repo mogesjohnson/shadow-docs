@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { DocsShell, type TocItem } from "../DocsShell";
-import { Callout, Feedback, H2, Pagination, PageHeader, Table } from "../blocks";
+import { Callout, Feedback, FromV1, H2, Pagination, PageHeader, Table } from "../blocks";
 import { neighbours, type PageEntry } from "../nav";
 
 /** One soldier CLI's page: the facts the v2 spec gives for it, in a fixed order. */
@@ -17,6 +17,8 @@ export type CliFacts = {
   /** Anything else worth knowing about this CLI. */
   notes?: ReactNode;
   measured: { task: [string, string]; followUp: [string, string]; note?: string };
+  /** How this CLI ran under v1, shown after the page's v2 copy. */
+  fromV1?: ReactNode;
 };
 
 const TOC: TocItem[] = [
@@ -34,7 +36,7 @@ export function CliPage({ page, facts }: { page: PageEntry; facts: CliFacts }) {
   const { prev, next } = neighbours(page.slug);
   const toc = facts.notes ? [...TOC.slice(0, 7), { id: "notes", title: "Also worth knowing" }, TOC[7]] : TOC;
   return (
-    <DocsShell current={page} toc={toc}>
+    <DocsShell current={page} toc={toc} fromV1={Boolean(facts.fromV1)}>
       <PageHeader page={page} description={facts.description} />
       <div className="sd-prose">
         <Callout kind="note">
@@ -86,6 +88,8 @@ export function CliPage({ page, facts }: { page: PageEntry; facts: CliFacts }) {
         />
         {facts.measured.note && <p>{facts.measured.note}</p>}
       </div>
+
+      {facts.fromV1 && <FromV1>{facts.fromV1}</FromV1>}
 
       <Feedback />
       <Pagination prev={prev} next={next} />

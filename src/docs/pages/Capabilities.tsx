@@ -1,5 +1,5 @@
 import { DocsShell, type TocItem } from "../DocsShell";
-import { Callout, Feedback, H2, Pagination, PageHeader, Table } from "../blocks";
+import { Callout, Feedback, FromV1, H2, Pagination, PageHeader, Table } from "../blocks";
 import { neighbours, type PageEntry } from "../nav";
 
 /*
@@ -18,7 +18,7 @@ const TOC: TocItem[] = [
 export function Capabilities({ page }: { page: PageEntry }) {
   const { prev, next } = neighbours(page.slug);
   return (
-    <DocsShell current={page} toc={TOC}>
+    <DocsShell current={page} toc={TOC} fromV1>
       <PageHeader
         page={page}
         description="Each adapter declares what its CLI can do at all. The roster can only narrow that, never widen it."
@@ -26,8 +26,7 @@ export function Capabilities({ page }: { page: PageEntry }) {
       <div className="sd-prose">
         <Callout kind="note">
           <p>
-            Shadow Army 2 is in development. The write and review capabilities are v1&apos;s, and carry over; the rest
-            is what v2&apos;s spec asks each adapter to declare.
+            Shadow Army 2 is in development. This page describes what its spec asks each adapter to declare.
           </p>
         </Callout>
 
@@ -81,6 +80,20 @@ export function Capabilities({ page }: { page: PageEntry }) {
           codex soldier with only the build role. No roster entry can give a soldier a capability its adapter lacks.
         </p>
       </div>
+
+      <FromV1>
+        <ul>
+          <li>
+            The <code>write</code> and <code>review</code> capabilities are v1&apos;s, from its adapter interface, and
+            v2 keeps them: the hard rules are enforced by each adapter&apos;s capabilities as well as when a brief is
+            sent.
+          </li>
+          <li>
+            The approval relay, interrupt, resume, <code>send</code> tool, cache rules, session services and fixture
+            version are new in v2, which keeps one live session per soldier where v1 ran one process per message.
+          </li>
+        </ul>
+      </FromV1>
 
       <Feedback />
       <Pagination prev={prev} next={next} />

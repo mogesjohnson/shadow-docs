@@ -15,7 +15,10 @@ const CLAUDE: CliFacts = {
     "Claude Code's own CLI as a soldier: one long-lived stream-json process per soldier, with the harness exactly as you installed it.",
   milestone: "M1, the first channel built",
   glance: [
-    ["Default soldiers", "Iron (claude-sonnet), Kaisel (claude-opus), Tank (claude-opus-build)"],
+    [
+      "Default soldiers",
+      "Iron (claude-sonnet) and Kaisel (claude-opus). Tank (claude-opus-build) is a default name, but no shipped file defines it yet",
+    ],
     ["Roles", "Sonnet builds; Opus reviews and takes hard builds"],
     ["Live channel", "stream-json, one process"],
     ["Instructions", <code key="v">--append-system-prompt</code>],
@@ -104,8 +107,13 @@ const CLAUDE: CliFacts = {
   measured: {
     task: ["66.7k", "62.6k"],
     followUp: ["35.9k", "36.1k"],
-    note: "As v1 launched it, claude's own setup was 31.5k tokens on every request.",
   },
+  fromV1: (
+    <p>
+      v1 started a new claude process for every message. As v1 launched it, claude&apos;s own setup was 31.5k tokens
+      on every request. v2 keeps one stream-json process per soldier instead.
+    </p>
+  ),
 };
 
 const CODEX: CliFacts = {
@@ -173,8 +181,14 @@ const CODEX: CliFacts = {
   measured: {
     task: ["40.7k", "42.8k"],
     followUp: ["41.2k", "27.0k"],
-    note: "In its normal follow-up, codex ran a command to count the lines again; the live session answered from what it had read. As v1 launched it, codex's own setup was 20.1k tokens on every request.",
+    note: "In its normal follow-up, codex ran a command to count the lines again; the live session answered from what it had read.",
   },
+  fromV1: (
+    <p>
+      v1 started a new codex process for every message. As v1 launched it, codex&apos;s own setup was 20.1k tokens on
+      every request. v2 keeps one app-server thread per soldier instead.
+    </p>
+  ),
 };
 
 const GROK: CliFacts = {
@@ -239,8 +253,13 @@ const GROK: CliFacts = {
   measured: {
     task: ["46.3k", "47.2k"],
     followUp: ["23.6k", "24.2k"],
-    note: "As v1 launched it, grok's own setup was about 23k tokens on every request.",
   },
+  fromV1: (
+    <p>
+      v1 started a new grok process for every message. As v1 launched it, grok&apos;s own setup was about 23k tokens
+      on every request. v2 keeps one ACP session per soldier instead.
+    </p>
+  ),
 };
 
 const AGY: CliFacts = {

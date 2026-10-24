@@ -18,7 +18,7 @@ const TOC: TocItem[] = [
 ];
 
 const CLIS: { soldier: Soldier; slug: string; name: string; who: string }[] = [
-  { soldier: "claude", slug: "claude", name: "Claude", who: "Iron, Kaisel, Tank" },
+  { soldier: "claude", slug: "claude", name: "Claude", who: "Iron, Kaisel; Tank is named, not yet defined" },
   { soldier: "codex", slug: "codex", name: "Codex", who: "Igris, Bellion" },
   { soldier: "grok", slug: "grok", name: "Grok", who: "Beru" },
   { soldier: "agy", slug: "agy", name: "agy", who: "Tusk" },
