@@ -29,7 +29,8 @@ export function Worktrees({ page }: { page: PageEntry }) {
       <div className="sd-prose">
         <Callout kind="note">
           <p>
-            Shadow Army 2 is in development. Worktrees arrive in v2&apos;s last milestone before release (M6). This page describes the accepted design.
+            Shadow Army 2 is in development. Worktrees arrive in v2&apos;s last milestone before release (M6). This
+            page describes the accepted design.
           </p>
         </Callout>
 

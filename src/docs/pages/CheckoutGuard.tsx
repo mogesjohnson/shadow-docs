@@ -27,8 +27,7 @@ export function CheckoutGuard({ page }: { page: PageEntry }) {
       <div className="sd-prose">
         <Callout kind="note">
           <p>
-            Shadow Army 2 is in development. It covers agy from milestone M2 and every
-            soldier from M6.
+            Shadow Army 2 is in development. The guard covers agy from milestone M2 and every soldier from M6.
           </p>
         </Callout>
 
