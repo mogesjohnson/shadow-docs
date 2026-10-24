@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { DocsShell, type TocItem } from "../DocsShell";
-import { Callout, Feedback, H2, Pagination, PageHeader } from "../blocks";
+import { Callout, Feedback, FromV1, H2, Pagination, PageHeader } from "../blocks";
 import { hrefOf, neighbours, type PageEntry } from "../nav";
 
 /*
@@ -21,7 +21,7 @@ const TOC: TocItem[] = [
 export function NewAdapter({ page }: { page: PageEntry }) {
   const { prev, next } = neighbours(page.slug);
   return (
-    <DocsShell current={page} toc={TOC}>
+    <DocsShell current={page} toc={TOC} fromV1>
       <PageHeader
         page={page}
         description="What a fifth CLI needs before it can join the army, as the v2 spec requires of the four that exist."
@@ -29,8 +29,8 @@ export function NewAdapter({ page }: { page: PageEntry }) {
       <div className="sd-prose">
         <Callout kind="warning">
           <p>
-            <strong>No scaffold yet.</strong> v1 planned an <code>sa adapter new</code> command; v2 has none. This page
-            lists what v2&apos;s spec requires of every adapter, so a new one can be planned against it.
+            <strong>No scaffold yet.</strong> Shadow Army 2 has no command that starts an adapter for you. This page
+            lists what its spec requires of every adapter, so a new one can be planned against it.
           </p>
         </Callout>
 
@@ -102,6 +102,18 @@ export function NewAdapter({ page }: { page: PageEntry }) {
           focused pull request, with its tests in the same PR as its code.
         </p>
       </div>
+
+      <FromV1>
+        <ul>
+          <li>
+            v1 planned an <code>sa adapter new</code> command to scaffold an adapter. v2 has none.
+          </li>
+          <li>
+            A v1 adapter started the CLI once per message. A v2 adapter keeps one live session open, which is why the
+            CLI needs a live-session interface.
+          </li>
+        </ul>
+      </FromV1>
 
       <Feedback />
       <Pagination prev={prev} next={next} />
