@@ -1,0 +1,22 @@
+html,
+body {
+  margin: 0;
+  background: #0c0c0c;
+}
+
+html[data-theme="light"],
+html[data-theme="light"] body {
+  background: #faf9fc;
+}
+
+html {
+  color-scheme: dark;
+}
+
+html[data-theme="light"] {
+  color-scheme: light;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+}
