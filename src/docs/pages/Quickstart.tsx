@@ -5,9 +5,10 @@ import { hrefOf, neighbours, type PageEntry } from "../nav";
 
 /*
  * Sources (shadow-army main at ab04992): docs/spec/v2.md v0.5 (HOST-1,
- * HOST-2, HOST-5, HOST-9, HOST-10, MSG-9, MSG-10, PO-7, WSP-9 and the
- * milestones M1 to M6). Nothing here has shipped: the owner asked for the
- * page to be written from the spec and marked as planned.
+ * HOST-2, HOST-5, HOST-9, HOST-10, ARM-1, ARM-3, MSG-9, MSG-10, PO-7,
+ * WSP-9 and the milestones M1 to M6) and shadow.config.json. Nothing here
+ * has shipped: the owner asked for the page to be written from the spec
+ * and marked as planned.
  */
 
 const TOC: TocItem[] = [
@@ -63,8 +64,8 @@ export function Quickstart({ page }: { page: PageEntry }) {
         <CodeBlock placeholder={false} variants={[{ label: "Claude Code", lines: ["/army"] }]} />
         <p>
           <code>/army</code> lists every soldier with its two-letter tag, and shows the post office&apos;s own log. The
-          default army is Iron, Igris, Beru and Tusk. The army strip above the prompt shows the same soldiers on one
-          line.
+          bundled army has six soldiers: Iron, Igris, Beru, Tusk, Kaisel and Bellion. The army strip above the prompt
+          shows the same soldiers on one line.
         </p>
 
         <H2 id="send-work">3. Send work</H2>

@@ -37,7 +37,11 @@ export function FirstArmy({ page }: { page: PageEntry }) {
         <H2 id="the-two-files">1. The two files</H2>
         <p>
           The roster lives in two files at the root of your repository, and both must list the same soldiers.{" "}
-          <code>shadow.config.json</code> says how each soldier runs:
+          <code>shadow.config.json</code> says how each soldier runs.
+        </p>
+        <p>
+          The bundled files list six soldiers. This guide uses a smaller custom army of four, one per CLI, with
+          claude-opus (Kaisel) and codex-astra (Bellion) left out. To keep all six, use the bundled files as they are.
         </p>
         <CodeBlock
           placeholder={false}
@@ -89,8 +93,8 @@ export function FirstArmy({ page }: { page: PageEntry }) {
         <H2 id="check">2. Check the army</H2>
         <CodeBlock placeholder={false} variants={[{ label: "Claude Code", lines: ["/army"] }]} />
         <p>
-          Each soldier gets its default shadow name: Iron, Igris, Beru and Tusk. The strip above the prompt shows them
-          with their state glyphs.
+          Each soldier in this four-soldier army gets its default shadow name: Iron, Igris, Beru and Tusk. The strip
+          above the prompt shows them with their state glyphs.
         </p>
 
         <H2 id="brief">3. Brief one soldier</H2>

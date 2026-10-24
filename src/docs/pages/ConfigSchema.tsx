@@ -7,7 +7,8 @@ import { hrefOf, neighbours, type PageEntry } from "../nav";
  * Sources (shadow-army main at ab04992): src/core/config.ts and
  * src/core/delegate.ts (v1's loaders, which v2 carries over),
  * shadow.config.json, orchestratorDelegate.md and docs/spec/v2.md v0.5
- * (ARM-1, SES-8, SET-1, VIS-6, MSG-11). Shadow Army 2 is not released yet.
+ * (ARM-1, SES-8, SET-1, VIS-6, MSG-11, milestones M4 to M6). Shadow Army
+ * 2 is not released yet.
  */
 
 const TOC: TocItem[] = [
@@ -104,7 +105,8 @@ export function ConfigSchema({ page }: { page: PageEntry }) {
         <H2 id="v2-keys">Keys v2 adds</H2>
         <p>
           All four are set per soldier in <code>shadow.config.json</code>, next to <code>cli</code> and{" "}
-          <code>model</code>. They arrive with milestone M4.
+          <code>model</code>. <code>handoffAt</code> and <code>cacheLifetime</code> arrive with milestone M4,{" "}
+          <code>tag</code> with M5 and <code>tests</code> with M6. Their exact format is set at release.
         </p>
         <Table
           head={["Key", "What it sets", "Default"]}

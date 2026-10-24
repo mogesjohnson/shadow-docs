@@ -27,7 +27,7 @@ export function Autonomy({ page }: { page: PageEntry }) {
       <div className="sd-prose">
         <Callout kind="note">
           <p>
-            Shadow Army 2 is in development. The flag table below can change as each v2 channel ships.
+            Shadow Army 2 is in development. Which vendor flag each level picks is set as each v2 channel ships.
           </p>
         </Callout>
 
@@ -55,29 +55,15 @@ export function Autonomy({ page }: { page: PageEntry }) {
         />
 
         <H2 id="levels">The levels</H2>
-        <Table
-          head={["Level", "claude", "codex", "grok", "agy"]}
-          rows={[
-            [
-              <code key="l">supervised</code>,
-              "plan / acceptEdits",
-              "read-only / workspace-write sandbox",
-              "plan / acceptEdits",
-              "plan",
-            ],
-            [<code key="l">auto</code>, "its classifier (auto)", "automatic review", "auto", "plan (no classifier mode)"],
-            [
-              <code key="l">full</code>,
-              "bypassPermissions",
-              "full access, never asks",
-              "--always-approve",
-              "--dangerously-skip-permissions",
-            ],
-          ]}
-        />
+        <p>
+          There are three levels: <code>supervised</code>, <code>auto</code> and <code>full</code>, from the most
+          cautious to the least. Each level picks one of the CLI&apos;s own documented permission modes, and nothing
+          else: no adapter passes a flag that disables a safeguard, replaces a system prompt or removes a tool.
+        </p>
         <p>
           <code>supervised</code> is the default. The shipped config runs codex-sol, grok and agy at <code>full</code>,
-          and claude-opus and claude-sonnet at <code>auto</code>.
+          and claude-opus and claude-sonnet at <code>auto</code>. The exact mode each level picks for each CLI in v2 is
+          fixed as that CLI&apos;s channel ships; v1&apos;s mapping is under From v1 to v2.
         </p>
 
         <H2 id="approvals-and-agy">Approvals, agy and the Monarch</H2>
@@ -109,12 +95,35 @@ export function Autonomy({ page }: { page: PageEntry }) {
       </div>
       <FromV1>
         <ul>
-          <li>Autonomy carries over from v1.</li>
-          <li>The flag table is v1&apos;s mapping of each level to each vendor&apos;s flags.</li>
+          <li>Autonomy and its three levels carry over from v1.</li>
           <li>
             New in v2: approvals come to you word for word, and agy always runs in a read-only snapshot.
           </li>
+          <li>
+            v1 mapped each level to these vendor flags. v2 has not adopted this table; it applies to the{" "}
+            <code>sa</code> CLI only.
+          </li>
         </ul>
+        <Table
+          head={["Level (v1)", "claude", "codex", "grok", "agy"]}
+          rows={[
+            [
+              <code key="l">supervised</code>,
+              "plan / acceptEdits",
+              "read-only / workspace-write sandbox",
+              "plan / acceptEdits",
+              "plan",
+            ],
+            [<code key="l">auto</code>, "its classifier (auto)", "automatic review", "auto", "plan (no classifier mode)"],
+            [
+              <code key="l">full</code>,
+              "bypassPermissions",
+              "full access, never asks",
+              "--always-approve",
+              "--dangerously-skip-permissions",
+            ],
+          ]}
+        />
       </FromV1>
       <Feedback />
       <Pagination prev={prev} next={next} />

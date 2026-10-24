@@ -48,7 +48,17 @@ export function Troubleshooting({ page }: { page: PageEntry }) {
               "Read the CLI's own words in the pane. A rate limit passes; a context overflow calls for /fresh",
             ],
             ["waiting", "The CLI asks for your approval", "Answer it with 1 to 9, or s to stop the turn"],
-            ["held", "The queue waits for you after a stop or an open card", "g sends it, or q to change it first"],
+            ["held, after a stop", "You stopped a turn, so the queue waits for you", "g sends it, or q to change it first"],
+            [
+              "held, at a handoff",
+              "A handoff card is open, and the queue waits until you choose",
+              "a accepts, e edits, g keeps going. The queue goes on after your choice",
+            ],
+            [
+              "held, at an attribution card",
+              "The checkout guard found changes it cannot explain, and the turn's summary and queue wait for your answer",
+              "y if the changes are yours, n to fail the turn. g does not answer this card. The queue goes on once you answer",
+            ],
             ["handoff", "A handoff summary is ready", "a accepts, e edits, g keeps going"],
             [
               "stopping",
@@ -96,7 +106,17 @@ export function Troubleshooting({ page }: { page: PageEntry }) {
             tested with. It still connects.
           </li>
           <li>
-            <strong>A read-violation</strong> means agy wrote something. The write was discarded.
+            <strong>A read-violation</strong> fails a turn for one of two reasons, with different results:
+            <ul>
+              <li>
+                agy wrote a file in its throwaway snapshot. That write is discarded with the snapshot and never
+                reaches a branch or your folder.
+              </li>
+              <li>
+                You answered n to an attribution card. The turn fails, but the checkout changes the card listed are
+                not rolled back. Check those paths and restore them yourself if you need to.
+              </li>
+            </ul>
           </li>
         </ul>
 

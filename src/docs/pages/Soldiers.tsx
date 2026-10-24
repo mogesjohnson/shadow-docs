@@ -5,8 +5,9 @@ import { neighbours, type PageEntry } from "../nav";
 /*
  * Sources (shadow-army main at ab04992): docs/spec/v2.md v0.5 (ARM-1 to
  * ARM-6, SI-1 to SI-4, PO-4, CH-2 to CH-6, HOST-6, VIS-6),
- * docs/claude-first.md and orchestratorDelegate.md. Shadow Army 2 is not
- * released yet; this page describes the accepted design.
+ * docs/claude-first.md, shadow.config.json and orchestratorDelegate.md.
+ * Shadow Army 2 is not released yet; this page describes the accepted
+ * design.
  */
 
 const TOC: TocItem[] = [
@@ -91,12 +92,30 @@ export function Soldiers({ page }: { page: PageEntry }) {
               "stream-json, one process",
               "research, test; never writes",
             ],
+            [
+              <span key="n" className="sd-cell-soldier">
+                <SoldierDot soldier="claude" />
+                Kaisel
+              </span>,
+              "claude, Opus",
+              "stream-json, one process",
+              "review; build for hard work",
+            ],
+            [
+              <span key="n" className="sd-cell-soldier">
+                <SoldierDot soldier="codex" />
+                Bellion
+              </span>,
+              "codex, gpt-6-astra",
+              "codex app-server",
+              "review; build for hard work",
+            ],
           ]}
         />
         <p>
-          The design names three more default shadow names for soldiers you add: Kaisel (claude-opus), Bellion
-          (codex-astra) and Tank (claude-opus-build). Kaisel and Bellion take reviews and hard builds. Tank is named
-          but not yet defined: no shipped file lists it.
+          These six are the soldiers the bundled <code>shadow.config.json</code> and{" "}
+          <code>orchestratorDelegate.md</code> list. The design names one more default shadow name, Tank
+          (claude-opus-build). Tank is named but not yet defined: no shipped file lists it.
         </p>
         <p>
           Roles, cost and the limits live in <code>orchestratorDelegate.md</code>. The CLI, model and autonomy live

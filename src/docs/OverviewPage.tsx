@@ -37,8 +37,9 @@ import { findPage, hrefOf, neighbours, type Soldier } from "./nav";
 /*
  * Sources (shadow-army main at ab04992): README.md, docs/claude-first.md,
  * docs/spec/v2.md v0.5 (sections 1 and 3, HOST-1, HOST-9, ARM-2, ARM-3,
- * CH-2 to CH-5) and the v1.0.0 and v1.0.1 release notes. Shadow Army 2 is
- * not released yet; this page describes the accepted design.
+ * CH-2 to CH-5, ARM-1), shadow.config.json, orchestratorDelegate.md and
+ * the v1.0.0 and v1.0.1 release notes. Shadow Army 2 is not released yet;
+ * this page describes the accepted design.
  */
 
 const TOC: TocItem[] = [
@@ -53,6 +54,8 @@ const SOLDIERS: { soldier: Soldier; name: string; cli: string; builds: string; r
   { soldier: "codex", name: "Igris", cli: "codex", builds: "yes", reviews: "no", best: "Building features end to end" },
   { soldier: "grok", name: "Beru", cli: "grok", builds: "yes", reviews: "never", best: "Creating new features quickly" },
   { soldier: "agy", name: "Tusk", cli: "agy", builds: "never", reviews: "no", best: "Research, and running and analysing tests" },
+  { soldier: "claude", name: "Kaisel", cli: "claude", builds: "hard work", reviews: "yes", best: "Code review, subtle bugs and hard problems" },
+  { soldier: "codex", name: "Bellion", cli: "codex", builds: "hard work", reviews: "yes", best: "Reviews and hard builds" },
 ];
 
 export function OverviewPage() {
@@ -192,9 +195,9 @@ export function OverviewPage() {
 
         <H2 id="meet-the-soldiers">Meet the soldiers</H2>
         <p>
-          The default army has four soldiers, one per CLI. Claude routes work by each soldier&apos;s roles and cost,
-          from <code>orchestratorDelegate.md</code>. None of the four reviews: add Kaisel (claude-opus) or Bellion
-          (codex-astra) for reviews and hard builds.
+          The bundled army has six soldiers across the four CLIs. Claude routes work by each soldier&apos;s roles and
+          cost, from <code>orchestratorDelegate.md</code>. Kaisel (claude-opus) and Bellion (codex-astra) take reviews
+          and hard builds. A seventh shadow name, Tank (claude-opus-build), is named but not yet defined.
         </p>
         <Table
           head={["Soldier", "CLI", "Builds", "Reviews", "Best for"]}
