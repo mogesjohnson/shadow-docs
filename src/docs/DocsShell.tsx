@@ -2,8 +2,8 @@
 
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
 import Link from "next/link";
-import { ArrowUpRight, GitBranch, Menu, Search, X } from "lucide-react";
-import { PhInline, SoldierDot } from "./blocks";
+import { ArrowUpRight, GitBranch, History, Menu, Search, X } from "lucide-react";
+import { FROM_V1_ID, PhInline, SoldierDot } from "./blocks";
 import { useDocsHost, type FooterColumn } from "./host";
 import { LogoBar, LogoCompact, LogoStacked } from "./Logo";
 import { DOCS_REPO_URL, REPO_URL, hrefOf, pages, tabs, type PageEntry } from "./nav";
@@ -111,6 +111,19 @@ function OnThisPage({ toc }: { toc: TocItem[] }) {
         ))}
       </ul>
     </nav>
+  );
+}
+
+/** The rail's link to the page's "From v1 to v2" section. */
+function FromV1Link() {
+  return (
+    <a href={`#${FROM_V1_ID}`} className="sd-rail-history">
+      <History size={14} aria-hidden="true" />
+      <span>
+        <span className="sd-rail-history-title">From v1 to v2</span>
+        <span className="sd-rail-history-text">How this page changed since v1</span>
+      </span>
+    </a>
   );
 }
 
@@ -242,7 +255,18 @@ function Footer() {
 /* Shell                                                                */
 /* ------------------------------------------------------------------ */
 
-export function DocsShell({ current, toc, children }: { current: PageEntry; toc: TocItem[]; children: ReactNode }) {
+export function DocsShell({
+  current,
+  toc,
+  fromV1 = false,
+  children,
+}: {
+  current: PageEntry;
+  toc: TocItem[];
+  /** The page ends with a FromV1 section, so the rail links to it. */
+  fromV1?: boolean;
+  children: ReactNode;
+}) {
   const [drawer, setDrawer] = useState(false);
   const [search, setSearch] = useState(false);
   const mod = useModKey();
@@ -320,7 +344,10 @@ export function DocsShell({ current, toc, children }: { current: PageEntry; toc:
             {children}
           </article>
           <aside className="sd-rail">
-            <OnThisPage toc={toc} />
+            <div className="sd-rail-inner">
+              <OnThisPage toc={toc} />
+              {fromV1 && <FromV1Link />}
+            </div>
           </aside>
         </div>
       </div>

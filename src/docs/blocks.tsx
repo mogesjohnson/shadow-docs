@@ -11,6 +11,7 @@ import {
   ChevronRight,
   Copy,
   FileText,
+  History,
   Info,
   Lightbulb,
   Link2,
@@ -355,6 +356,25 @@ export function Table({ head, rows }: { head: string[]; rows: ReactNode[][] }) {
 /* ------------------------------------------------------------------ */
 /* Page end                                                             */
 /* ------------------------------------------------------------------ */
+
+/** Anchor of the "From v1 to v2" section; the right rail links to it. */
+export const FROM_V1_ID = "from-v1";
+
+/**
+ * How this page's subject grew from v1, kept after the page's v2 copy so the
+ * main text describes v2 only. Pair it with `fromV1` on DocsShell.
+ */
+export function FromV1({ children }: { children: ReactNode }) {
+  return (
+    <section className="sd-from-v1" aria-labelledby={FROM_V1_ID}>
+      <h2 id={FROM_V1_ID} className="sd-from-v1-title">
+        <History size={16} aria-hidden="true" />
+        From v1 to v2
+      </h2>
+      <div className="sd-from-v1-body">{children}</div>
+    </section>
+  );
+}
 
 export function Feedback() {
   const [vote, setVote] = useState<"yes" | "no" | null>(null);
