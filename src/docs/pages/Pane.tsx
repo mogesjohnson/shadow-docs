@@ -1,5 +1,5 @@
 import { DocsShell, type TocItem } from "../DocsShell";
-import { Callout, CodeBlock, Feedback, H2, H3, Pagination, PageHeader, Table } from "../blocks";
+import { Callout, CodeBlock, Feedback, FromV1, H2, H3, Pagination, PageHeader, Table } from "../blocks";
 import { neighbours, type PageEntry } from "../nav";
 
 /*
@@ -37,7 +37,7 @@ const KEYS: [string, string][] = [
 export function Pane({ page }: { page: PageEntry }) {
   const { prev, next } = neighbours(page.slug);
   return (
-    <DocsShell current={page} toc={TOC}>
+    <DocsShell current={page} toc={TOC} fromV1>
       <PageHeader
         page={page}
         description="Watch any soldier as it works, in a pane beside Claude's transcript, while the strip keeps the whole army on one line."
@@ -46,8 +46,7 @@ export function Pane({ page }: { page: PageEntry }) {
         <Callout kind="note">
           <p>
             Shadow Army 2 is in development. This page describes the design the owner has accepted. Commands and
-            screens can still change before release. The pane replaces v1&apos;s live dashboard of{" "}
-            <code>sa run</code>.
+            screens can still change before release.
           </p>
         </Callout>
 
@@ -141,7 +140,13 @@ export function Pane({ page }: { page: PageEntry }) {
         </ul>
         <p>It comes once per absence, and it is not added to Claude&apos;s conversation, so it wakes nobody.</p>
       </div>
-
+      <FromV1>
+        <ul>
+          <li>
+            The pane replaces v1&apos;s live dashboard of <code>sa run</code>.
+          </li>
+        </ul>
+      </FromV1>
       <Feedback />
       <Pagination prev={prev} next={next} />
     </DocsShell>

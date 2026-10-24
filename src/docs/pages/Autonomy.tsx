@@ -1,5 +1,5 @@
 import { DocsShell, type TocItem } from "../DocsShell";
-import { Callout, CodeBlock, Feedback, H2, Pagination, PageHeader, Table } from "../blocks";
+import { Callout, CodeBlock, Feedback, FromV1, H2, Pagination, PageHeader, Table } from "../blocks";
 import { neighbours, type PageEntry } from "../nav";
 
 /*
@@ -12,14 +12,14 @@ import { neighbours, type PageEntry } from "../nav";
 const TOC: TocItem[] = [
   { id: "what-autonomy-is", title: "What autonomy is" },
   { id: "levels", title: "The levels" },
-  { id: "in-v2", title: "What v2 adds" },
+  { id: "approvals-and-agy", title: "Approvals, agy and the Monarch" },
   { id: "containers", title: "Outside your repository" },
 ];
 
 export function Autonomy({ page }: { page: PageEntry }) {
   const { prev, next } = neighbours(page.slug);
   return (
-    <DocsShell current={page} toc={TOC}>
+    <DocsShell current={page} toc={TOC} fromV1>
       <PageHeader
         page={page}
         description="A soldier's autonomy picks which of its vendor's own permission modes it runs in. Shadow Army never adds or removes a vendor safeguard."
@@ -27,8 +27,7 @@ export function Autonomy({ page }: { page: PageEntry }) {
       <div className="sd-prose">
         <Callout kind="note">
           <p>
-            Shadow Army 2 is in development. Autonomy carries over from v1; the flag table below is v1&apos;s mapping,
-            which can change as each v2 channel ships.
+            Shadow Army 2 is in development. The flag table below can change as each v2 channel ships.
           </p>
         </Callout>
 
@@ -81,7 +80,7 @@ export function Autonomy({ page }: { page: PageEntry }) {
           and claude-opus and claude-sonnet at <code>auto</code>.
         </p>
 
-        <H2 id="in-v2">What v2 adds</H2>
+        <H2 id="approvals-and-agy">Approvals, agy and the Monarch</H2>
         <ul>
           <li>
             <strong>Approvals come to you.</strong> When claude, codex or grok asks for permission, the request is shown
@@ -108,7 +107,15 @@ export function Autonomy({ page }: { page: PageEntry }) {
           </p>
         </Callout>
       </div>
-
+      <FromV1>
+        <ul>
+          <li>Autonomy carries over from v1.</li>
+          <li>The flag table is v1&apos;s mapping of each level to each vendor&apos;s flags.</li>
+          <li>
+            New in v2: approvals come to you word for word, and agy always runs in a read-only snapshot.
+          </li>
+        </ul>
+      </FromV1>
       <Feedback />
       <Pagination prev={prev} next={next} />
     </DocsShell>

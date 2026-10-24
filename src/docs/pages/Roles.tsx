@@ -1,5 +1,5 @@
 import { DocsShell, type TocItem } from "../DocsShell";
-import { Callout, Feedback, H2, Pagination, PageHeader, SoldierDot, Table } from "../blocks";
+import { Callout, Feedback, FromV1, H2, Pagination, PageHeader, SoldierDot, Table } from "../blocks";
 import { neighbours, type PageEntry, type Soldier } from "../nav";
 
 /*
@@ -28,7 +28,7 @@ const ROSTER: { soldier: Soldier; name: string; id: string; roles: string; cost:
 export function Roles({ page }: { page: PageEntry }) {
   const { prev, next } = neighbours(page.slug);
   return (
-    <DocsShell current={page} toc={TOC}>
+    <DocsShell current={page} toc={TOC} fromV1>
       <PageHeader
         page={page}
         description="Every brief names its kind of work, and a soldier takes only the kinds its roles allow."
@@ -36,8 +36,7 @@ export function Roles({ page }: { page: PageEntry }) {
       <div className="sd-prose">
         <Callout kind="note">
           <p>
-            Shadow Army 2 is in development. This page describes the design the owner has accepted. Roles carry over
-            from v1.
+            Shadow Army 2 is in development. This page describes the design the owner has accepted.
           </p>
         </Callout>
 
@@ -50,10 +49,7 @@ export function Roles({ page }: { page: PageEntry }) {
         <ul>
           <li>Writes need the build role, and happen only in the soldier&apos;s own worktree, under its claims.</li>
           <li>Only the Monarch plans and assigns work. Soldiers answer, ask and report.</li>
-          <li>
-            v1&apos;s <code>orchestrate</code> role and <code>monarch</code> block mean nothing in v2: Claude is the
-            Monarch, and no brief asks for orchestration.
-          </li>
+          <li>Claude is the Monarch, so no brief asks for orchestration.</li>
         </ul>
 
         <H2 id="who-does-what">Who does what</H2>
@@ -70,9 +66,8 @@ export function Roles({ page }: { page: PageEntry }) {
           ])}
         />
         <p>
-          Bellion&apos;s roles are as the v2 spec sets them; the delegate file on <code>main</code> still lists
-          v1&apos;s <code>orchestrate</code> role for codex-astra. Bellion is listed after Kaisel because v1&apos;s router breaks ties by roster order, so until v1&apos;s code
-          leaves <code>main</code> it still ranks Kaisel first for reviews and hard builds.
+          Bellion takes review and hard builds, as Kaisel does, and is listed after Kaisel. Tank (claude-opus-build)
+          is named but not yet defined.
         </p>
 
         <H2 id="cost">Cost and effort</H2>
@@ -102,7 +97,21 @@ export function Roles({ page }: { page: PageEntry }) {
           role away from a soldier, but can never give Grok the review role or let agy write.
         </p>
       </div>
-
+      <FromV1>
+        <ul>
+          <li>Roles carry over from v1.</li>
+          <li>
+            v1&apos;s <code>orchestrate</code> role and <code>monarch</code> block mean nothing in v2.
+          </li>
+          <li>
+            The delegate file on <code>main</code> still lists v1&apos;s <code>orchestrate</code> role for codex-astra.
+          </li>
+          <li>
+            Bellion is listed after Kaisel because v1&apos;s router breaks ties by roster order. Until v1&apos;s code
+            leaves <code>main</code>, it still ranks Kaisel first for reviews and hard builds.
+          </li>
+        </ul>
+      </FromV1>
       <Feedback />
       <Pagination prev={prev} next={next} />
     </DocsShell>
