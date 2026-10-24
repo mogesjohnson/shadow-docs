@@ -1,6 +1,7 @@
 import type { ComponentType } from "react";
 import type { PageEntry } from "./nav";
 import { AdapterProtocol } from "./pages/AdapterProtocol";
+import { AgentMd } from "./pages/AgentMd";
 import { ApplyChanges } from "./pages/ApplyChanges";
 import { Army } from "./pages/Army";
 import { Autonomy } from "./pages/Autonomy";
@@ -10,17 +11,23 @@ import { Capabilities } from "./pages/Capabilities";
 import { Changelog } from "./pages/Changelog";
 import { CheckoutGuard } from "./pages/CheckoutGuard";
 import { AgyCli, ClaudeCli, CodexCli, GrokCli } from "./pages/Clis";
+import { Cost } from "./pages/Cost";
 import { FileClaims } from "./pages/FileClaims";
 import { FirstArmy } from "./pages/FirstArmy";
 import { HardRules } from "./pages/HardRules";
 import { HowItWorks } from "./pages/HowItWorks";
 import { ManageSessions } from "./pages/ManageSessions";
+import { Models } from "./pages/Models";
 import { NewAdapter } from "./pages/NewAdapter";
+import { OrchestratorDelegate } from "./pages/OrchestratorDelegate";
 import { Pane } from "./pages/Pane";
 import { Quickstart } from "./pages/Quickstart";
 import { Roles } from "./pages/Roles";
+import { RoutingPolicy } from "./pages/RoutingPolicy";
+import { RulesMd } from "./pages/RulesMd";
 import { SecondReviewer } from "./pages/SecondReviewer";
 import { Send } from "./pages/Send";
+import { ShadowConfig } from "./pages/ShadowConfig";
 import { ShadowVault } from "./pages/ShadowVault";
 import { Snapshots } from "./pages/Snapshots";
 import { Soldiers } from "./pages/Soldiers";
@@ -64,4 +71,11 @@ export const written: Record<string, ComponentType<{ page: PageEntry }>> = {
   "adapter-protocol": AdapterProtocol,
   capabilities: Capabilities,
   "new-adapter": NewAdapter,
+  "shadow-config": ShadowConfig,
+  "orchestrator-delegate": OrchestratorDelegate,
+  "routing-policy": RoutingPolicy,
+  "rules-md": RulesMd,
+  "agent-md": AgentMd,
+  models: Models,
+  cost: Cost,
 };
