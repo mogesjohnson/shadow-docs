@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { DocsShell, type TocItem } from "../DocsShell";
-import { Callout, CodeBlock, Feedback, H2, H3, Pagination, PageHeader, Table } from "../blocks";
+import { Callout, CodeBlock, Feedback, FromV1, H2, H3, Pagination, PageHeader, Table } from "../blocks";
 import { hrefOf, neighbours, type PageEntry } from "../nav";
 
 /*
@@ -19,7 +19,7 @@ const TOC: TocItem[] = [
 export function Send({ page }: { page: PageEntry }) {
   const { prev, next } = neighbours(page.slug);
   return (
-    <DocsShell current={page} toc={TOC}>
+    <DocsShell current={page} toc={TOC} fromV1>
       <PageHeader
         page={page}
         description="Work reaches a soldier as a brief, sent by name: by Claude with its send tool, or by you with /send."
@@ -28,8 +28,7 @@ export function Send({ page }: { page: PageEntry }) {
         <Callout kind="note">
           <p>
             Shadow Army 2 is in development. This page describes the design the owner has accepted. Commands and
-            screens can still change before release. v1&apos;s <code>sa summon</code> and <code>sa run</code> are gone
-            in v2: Claude plans, and briefs go by name.
+            screens can still change before release.
           </p>
         </Callout>
 
@@ -115,7 +114,14 @@ export function Send({ page }: { page: PageEntry }) {
           </p>
         </Callout>
       </div>
-
+      <FromV1>
+        <ul>
+          <li>
+            v1&apos;s <code>sa summon</code> and <code>sa run</code> are gone in v2: Claude plans, and briefs go by
+            name.
+          </li>
+        </ul>
+      </FromV1>
       <Feedback />
       <Pagination prev={prev} next={next} />
     </DocsShell>

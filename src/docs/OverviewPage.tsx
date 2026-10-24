@@ -24,6 +24,7 @@ import {
   CardGrid,
   CodeBlock,
   Feedback,
+  FromV1,
   H2,
   Pagination,
   PageHeader,
@@ -59,7 +60,7 @@ export function OverviewPage() {
   const { prev, next } = neighbours("overview");
 
   return (
-    <DocsShell current={page} toc={TOC}>
+    <DocsShell current={page} toc={TOC} fromV1>
       <PageHeader
         page={page}
         description="Shadow Army lets your Claude Code session lead the other AI coding CLIs you already use, as one army, without sharing their conversations."
@@ -74,8 +75,7 @@ export function OverviewPage() {
         <Callout kind="note">
           <p>
             <strong>Shadow Army 2 is in development.</strong> These docs describe the design the owner has accepted
-            (spec v0.5). There is no release yet. The old per-message <code>sa</code> CLI is v1, frozen at{" "}
-            <code>v1.0.1</code>, and these docs do not cover it.
+            (spec v0.5). There is no release yet.
           </p>
         </Callout>
 
@@ -238,7 +238,14 @@ export function OverviewPage() {
           ]}
         />
       </div>
-
+      <FromV1>
+        <ul>
+          <li>
+            The old per-message <code>sa</code> CLI is v1. It is frozen at <code>v1.0.1</code>, and these docs do not
+            cover it.
+          </li>
+        </ul>
+      </FromV1>
       <Feedback />
       <Pagination prev={prev} next={next} />
     </DocsShell>

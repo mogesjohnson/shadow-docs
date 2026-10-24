@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { DocsShell, type TocItem } from "../DocsShell";
-import { Callout, CodeBlock, Feedback, H2, Pagination, PageHeader } from "../blocks";
+import { Callout, CodeBlock, Feedback, FromV1, H2, Pagination, PageHeader } from "../blocks";
 import { hrefOf, neighbours, type PageEntry } from "../nav";
 
 /*
@@ -22,7 +22,7 @@ const TOC: TocItem[] = [
 export function Quickstart({ page }: { page: PageEntry }) {
   const { prev, next } = neighbours(page.slug);
   return (
-    <DocsShell current={page} toc={TOC}>
+    <DocsShell current={page} toc={TOC} fromV1>
       <PageHeader
         page={page}
         description="How a first session with Shadow Army 2 is planned to go: load the mod in Claude Code, check your army and send it one piece of work."
@@ -31,8 +31,7 @@ export function Quickstart({ page }: { page: PageEntry }) {
         <Callout kind="warning">
           <p>
             <strong>Planned, not released.</strong> Shadow Army 2 has no install command or release yet. Every step
-            below comes from the accepted design and can change before release. The old <code>sa</code> CLI (v1) is
-            frozen at <code>v1.0.1</code> and is not covered here.
+            below comes from the accepted design and can change before release.
           </p>
         </Callout>
 
@@ -118,7 +117,14 @@ export function Quickstart({ page }: { page: PageEntry }) {
           Next, read <Link href={hrefOf("how-shadow-army-works")}>How Shadow Army works</Link>.
         </p>
       </div>
-
+      <FromV1>
+        <ul>
+          <li>
+            The old <code>sa</code> CLI is v1. It is frozen at <code>v1.0.1</code> and is not covered in these
+            docs.
+          </li>
+        </ul>
+      </FromV1>
       <Feedback />
       <Pagination prev={prev} next={next} />
     </DocsShell>

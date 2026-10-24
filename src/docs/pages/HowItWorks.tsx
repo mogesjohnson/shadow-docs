@@ -1,5 +1,5 @@
 import { DocsShell, type TocItem } from "../DocsShell";
-import { Callout, CodeBlock, Feedback, H2, H3, Pagination, PageHeader, SoldierDot, Table } from "../blocks";
+import { Callout, CodeBlock, Feedback, FromV1, H2, H3, Pagination, PageHeader, SoldierDot } from "../blocks";
 import { neighbours, type PageEntry } from "../nav";
 
 /*
@@ -13,13 +13,12 @@ const TOC: TocItem[] = [
   { id: "one-piece-of-work", title: "One piece of work, end to end" },
   { id: "sessions-and-cost", title: "Sessions and cost" },
   { id: "safety", title: "Safety" },
-  { id: "what-changed", title: "What changed from v1" },
 ];
 
 export function HowItWorks({ page }: { page: PageEntry }) {
   const { prev, next } = neighbours(page.slug);
   return (
-    <DocsShell current={page} toc={TOC}>
+    <DocsShell current={page} toc={TOC} fromV1>
       <PageHeader
         page={page}
         description="Your own Claude Code session leads, and each soldier is one live session of its own CLI, held open by a small local helper called the post office."
@@ -72,6 +71,14 @@ export function HowItWorks({ page }: { page: PageEntry }) {
             bar in its soldier&apos;s colour, and opens a side pane when you ask for it or when a soldier needs you.
           </li>
         </ul>
+        <p>
+          Default soldiers:{" "}
+          <span>
+            <SoldierDot soldier="claude" /> Iron, <SoldierDot soldier="codex" /> Igris,{" "}
+            <SoldierDot soldier="grok" /> Beru, <SoldierDot soldier="agy" /> Tusk, <SoldierDot soldier="claude" />{" "}
+            Kaisel and <SoldierDot soldier="codex" /> Bellion. Tank is named but not yet defined.
+          </span>
+        </p>
 
         <H2 id="one-piece-of-work">One piece of work, end to end</H2>
         <ol>
@@ -100,9 +107,10 @@ export function HowItWorks({ page }: { page: PageEntry }) {
 
         <H2 id="sessions-and-cost">Sessions and cost</H2>
         <p>
-          v1 started a new CLI process for every message, and most of each request was the CLI&apos;s own setup sent
-          again. Measured on 7 October 2026, a session held open cost the same as the CLI&apos;s normal run, within
-          about 5%, and no follow-up re-read a file. Keeping sessions open is where the savings come from.
+          Each soldier is one session held open, so a message does not start a new CLI process or send the
+          CLI&apos;s own setup again. Measured on 7 October 2026, a session held open cost the same as the CLI&apos;s
+          normal run, within about 5%, and no follow-up re-read a file. Keeping sessions open is where the savings
+          come from.
         </p>
         <H3 id="the-meter">The meter and the 200k handoff</H3>
         <ul>
@@ -142,30 +150,36 @@ export function HowItWorks({ page }: { page: PageEntry }) {
             <strong>The hard rules hold.</strong> Grok never reviews, and agy never writes.
           </li>
           <li>
-            <strong>v1&apos;s workspace safety carries over</strong>: worktrees, file claims and the claim audit, the
-            checkout guard, all-or-nothing apply, and undo.
+            <strong>Workspaces are safe.</strong> Soldiers work in worktrees with file claims and a claim audit, the
+            checkout guard watches your folder, and apply is all-or-nothing and can be undone.
           </li>
         </ul>
 
-        <H2 id="what-changed">What changed from v1</H2>
-        <Table
-          head={["Carries over", "Leaves with v1"]}
-          rows={[
-            ["Shadow names, roles and the hard rules", "The Ink chat (sa in a terminal)"],
-            ["orchestratorDelegate.md routing and shadow.config.json", "The live dashboard of sa run"],
-            ["Worktrees, claims and the claim audit", "sa run's separate Monarch and its plan and report calls"],
-            ["The checkout guard, link safety, apply and undo", "A new CLI process for every brief"],
-            ["The Shadow Vault", "The one-shot report parsers"],
-          ]}
-        />
-        <p>
-          Default soldiers:{" "}
-          <span>
-            <SoldierDot soldier="claude" /> Iron, <SoldierDot soldier="codex" /> Igris,{" "}
-            <SoldierDot soldier="grok" /> Beru and <SoldierDot soldier="agy" /> Tusk.
-          </span>
-        </p>
       </div>
+      <FromV1>
+        <p>These carry over from v1:</p>
+        <ul>
+          <li>Shadow names, roles and the hard rules.</li>
+          <li>
+            The <code>orchestratorDelegate.md</code> routing and <code>shadow.config.json</code>.
+          </li>
+          <li>Worktrees, claims and the claim audit.</li>
+          <li>The checkout guard, link safety, apply and undo.</li>
+          <li>The Shadow Vault.</li>
+        </ul>
+        <p>These leave with v1:</p>
+        <ul>
+          <li>
+            The Ink chat (<code>sa</code> in a terminal) and the live dashboard of <code>sa run</code>.
+          </li>
+          <li>
+            The separate Monarch of <code>sa run</code> and its plan and report calls. In v2 your Claude Code session is
+            the Monarch.
+          </li>
+          <li>A new CLI process for every brief. v2 keeps one live session per soldier.</li>
+          <li>The one-shot report parsers.</li>
+        </ul>
+      </FromV1>
 
       <Feedback />
       <Pagination prev={prev} next={next} />
