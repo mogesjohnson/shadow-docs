@@ -12,7 +12,7 @@ import { hrefOf, neighbours, type PageEntry } from "../nav";
 
 const TOC: TocItem[] = [
   { id: "why", title: "Why a second soldier" },
-  { id: "add-a-reviewer", title: "1. Add a reviewer" },
+  { id: "pick-a-reviewer", title: "1. Pick a reviewer" },
   { id: "build", title: "2. Build" },
   { id: "review", title: "3. Review" },
   { id: "act", title: "4. Act on the review" },
@@ -36,12 +36,20 @@ export function SecondReviewer({ page }: { page: PageEntry }) {
 
         <H2 id="why">Why a second soldier</H2>
         <p>
-          The routing guide&apos;s third tie-break is &ldquo;never let the author of a change review it&rdquo;. None
-          of the four default soldiers has the review role, and Grok never reviews, so reviews go to claude-opus
-          (Kaisel) or codex-astra (Bellion), at high effort.
+          The routing guide&apos;s third tie-break is &ldquo;never let the author of a change review it&rdquo;. Grok
+          never reviews, so reviews go to claude-opus (Kaisel) or codex-astra (Bellion), at high effort.
         </p>
 
-        <H2 id="add-a-reviewer">1. Add a reviewer</H2>
+        <H2 id="pick-a-reviewer">1. Pick a reviewer</H2>
+        <p>
+          The bundled army already has both reviewers. <code>/army</code> lists Kaisel and Bellion; this guide uses
+          Kaisel. Nothing needs adding.
+        </p>
+        <p>
+          If you started from the four-soldier army in{" "}
+          <Link href={hrefOf("first-army")}>Your first army</Link>, which leaves both reviewers out, add Kaisel back
+          to both files:
+        </p>
         <CodeBlock
           placeholder={false}
           variants={[
@@ -55,7 +63,7 @@ export function SecondReviewer({ page }: { page: PageEntry }) {
             },
           ]}
         />
-        <p>Add the soldier to both files. It joins the army as Kaisel.</p>
+        <p>It joins the army as Kaisel.</p>
 
         <H2 id="build">2. Build</H2>
         <CodeBlock
